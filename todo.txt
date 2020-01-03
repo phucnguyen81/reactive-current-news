@@ -1,0 +1,4 @@
+# Try out the API
+
+- Check out how angular support api
+- Write code to do it
