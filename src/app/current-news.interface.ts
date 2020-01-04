@@ -40,7 +40,7 @@ export interface News {
   category: string[];
   description: string;
   id: string;
-  image: string;
+  image?: string;
   language: string;
   published: string;
   title: string;

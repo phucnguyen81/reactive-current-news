@@ -1,0 +1,11 @@
+{
+  "/current-news": {
+    "target": "https://api.currentsapi.services",
+    "pathRewrite": {
+      "^/current-news": ""
+    },
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

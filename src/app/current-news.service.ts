@@ -16,19 +16,18 @@ export class CurrentNewsService {
 
   constructor(private httpClient:HttpClient) {}
 
-  latestNews$ = new rx.ReplaySubject<LatestNews>(1);
-  latestNewsError$ = new rx.ReplaySubject<HttpErrorResponse>(1);
-  latestNewsCancel$ = new rx.Subject<any>();
+  readonly latestNews$ = new rx.ReplaySubject<LatestNews>(1);
+  readonly latestNewsError$ = new rx.ReplaySubject<HttpErrorResponse>(1);
+  readonly latestNewsCancel$ = new rx.Subject<any>();
 
   fetchLatestNews(): void {
-    const url = 'https://api.currentsapi.services/v1/latest-news';
-
-    const params = new HttpParams()
-      .set('language', 'en')
-      .set('apiKey', 'dwZHTHEaDbirvOnTb3qm6yNyJbweQY3OebePf2RZV8O7iiz-');
+    const url = '/current-news/v1/latest-news';
+    const apiKey ='dwZHTHEaDbirvOnTb3qm6yNyJbweQY3OebePf2RZV8O7iiz-';
+    const headers = new HttpHeaders().set('Authorization', apiKey);
+    const params = new HttpParams().set('language', 'en');
 
     this.httpClient
-      .get<LatestNews>(url, {observe: 'response', params})
+      .get<LatestNews>(url, {observe: 'response', params, headers})
       .pipe(
         ops.map<HttpResponse<LatestNews>, LatestNews>(res => {
           return new LatestNewsResponse(res);

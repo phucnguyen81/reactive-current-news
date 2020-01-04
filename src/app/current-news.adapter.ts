@@ -11,12 +11,25 @@ export class LatestNewsResponse implements LatestNews {
 
   constructor(response: HttpResponse<LatestNews>) {
     this.status = response.body.status;
-    this.news = response.body.news;
-    this.rateLimitRemaining = Number(
-      response.headers.get('X-RateLimit-Remaining')
-    );
-    this.rateLimit = Number(
-      response.headers.get('X-RateLimit-Limit')
-    );
+    this.news = response.body.news.map(news => this.newsResponse(news));
+    if (response.headers.has('X-RateLimit-Remaining')) {
+      this.rateLimitRemaining = Number(
+        response.headers.get('X-RateLimit-Remaining')
+      );
+    }
+    if (response.headers.has('X-RateLimit-Limit')) {
+      this.rateLimit = Number(
+        response.headers.get('X-RateLimit-Limit')
+      );
+    }
   }
+
+  newsResponse(news: News): News {
+    const newsRes: News = {...news};
+    if (!newsRes.image || (newsRes.image === 'None')) {
+      delete newsRes.image;
+    }
+    return newsRes;
+  }
+
 }
