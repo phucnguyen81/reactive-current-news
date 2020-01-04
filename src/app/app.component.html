@@ -1,21 +1,17 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>
-Ananya Panday pairs baggy hoodie and mini shorts with Rs 20k slippers on day out. See pics
-    </mat-card-title>
-    <mat-card-subtitle>Author: @indiatoday</mat-card-subtitle>
-    <mat-card-subtitle>Category: world</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image
-    src="https://akm-img-a-in.tosshub.com/indiatoday/images/photogallery/202001/IMG_9782_IT_1578117647691.jpg?hz8MoIDiQ7Up3p7roygIOLO.31TeGcaj"
-    alt="Ananya Panday pairs baggy hoodie and mini shorts with Rs 20k slippers on day out. See pics">
-  <mat-card-content>
-    <p>
-Ananya Panday was recently spotted during a casual day out in Bandra, Mumbai. For her look, the Student Of The Year 2 actress opted for comfy clothing.
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <a mat-button href="https://www.indiatoday.in/lifestyle/photo/ananya-panday-pairs-baggy-hoodie-and-mini-shorts-with-rs-20k-slippers-on-day-out-see-pics-1633870-2020-01-04">Link</a>
-  </mat-card-actions>
-</mat-card>
+<ng-container *ngIf="latestNews">
+  <mat-card class="example-card" *ngFor="let news of latestNews.news">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{news.title}}</mat-card-title>
+      <mat-card-subtitle>Author: {{news.author}}</mat-card-subtitle>
+      <mat-card-subtitle>Category: {{news.category}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{news.image}}" alt="{{news.title}}">
+    <mat-card-content>
+      <p>{{news.description}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-button href="{{news.url}}">Source</a>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

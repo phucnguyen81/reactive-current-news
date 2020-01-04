@@ -29,8 +29,8 @@ export const LATEST_NEWS_EXAMPLE: LatestNews = {
 };
 
 export interface LatestNews {
-  status: string;
   news: News[];
+  status?: string;
   rateLimitRemaining?: number;  // Remaining calls of API keys
   rateLimit?: number;   // Daily limit of API keys
 }

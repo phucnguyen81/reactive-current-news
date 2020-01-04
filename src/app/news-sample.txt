@@ -138,8 +138,7 @@ ur planet' when he signed up for the gig.",
             "category": [
                 "entertainment"
             ],
-            "description": "Soon after the assassination, #WWIII and #FranzFerdinand began trending on Twitter because people began drawing parallels between
- him and Austrian major general Archduke Franz Ferdinand, whose killing triggered World War I. ",
+            "description": "Soon after the assassination, #WWIII and #FranzFerdinand began trending on Twitter because people began drawing parallels between him and Austrian major general Archduke Franz Ferdinand, whose killing triggered World War I. ",
             "id": "dc9ae720-26db-4f93-b3f3-6fe29d4d4c2e",
             "image": "https://cheesecake.articleassets.meaww.com/400215/uploads/72128190-2ec2-11ea-9956-c3bb9137727e_800_420.jpeg",
             "language": "en",
