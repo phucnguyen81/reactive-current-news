@@ -16,8 +16,8 @@ export class CurrentNewsService {
 
   constructor(private httpClient:HttpClient) {}
 
-  latestNews$ = new rx.Subject<LatestNews>();
-  latestNewsError$ = new rx.Subject<HttpErrorResponse>();
+  latestNews$ = new rx.ReplaySubject<LatestNews>(1);
+  latestNewsError$ = new rx.ReplaySubject<HttpErrorResponse>(1);
   latestNewsCancel$ = new rx.Subject<any>();
 
   fetchLatestNews(): void {
