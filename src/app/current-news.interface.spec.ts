@@ -1,8 +1,6 @@
-import { TestBed } from '@angular/core/testing';
-
 import {
   LATEST_NEWS_EXAMPLE, LatestNews
-} from './current-news.response';
+} from './current-news.interface';
 
 describe('LATEST_NEWS_EXAMPLE', () => {
   it('should has status ok', () => {

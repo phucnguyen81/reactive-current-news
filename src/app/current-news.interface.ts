@@ -1,5 +1,7 @@
 export const LATEST_NEWS_EXAMPLE: LatestNews = {
   status: 'ok',
+  rateLimitRemaining: 300,
+  rateLimit: 600,
   news: [
     {
       author: '@indiatoday',
@@ -29,6 +31,8 @@ export const LATEST_NEWS_EXAMPLE: LatestNews = {
 export interface LatestNews {
   status: string;
   news: News[];
+  rateLimitRemaining?: number;  // Remaining calls of API keys
+  rateLimit?: number;   // Daily limit of API keys
 }
 
 export interface News {
