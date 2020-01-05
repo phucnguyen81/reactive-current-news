@@ -1,8 +1,17 @@
-# Replace the angular material avatar with currents_api logo
+# [x] Extract the control from the service
+
+# Apply merge-scan pattern on the control
 
 # Check out examples/ideas for news feed
 -   https://news.google.com
 -   https://www.newsweek.com/newsfeed
+
+# Configuration feature for setting apiKey and language
+-   Local storate to save configurations?
+
+# Add state canFetchNews
+
+# Show warning if rate limit drops under a threshold
 
 # Show error messages (as modal dialog?)
 
@@ -13,8 +22,6 @@ On 'Not again', remove the news card and load
 a new one in. Need to persist news cards.
 
 # Refresh button => no, always have a fixed number of news available
-
-# Watch out for rate limit
 
 # Create top banner (for name, logo, search)
 See 'https://news.google.com'
