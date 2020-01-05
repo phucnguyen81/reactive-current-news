@@ -50,4 +50,8 @@ export class CurrentNewsService {
     this.latestNewsCancel$.next(true);
   }
 
+  openNewTab(url: string): void {
+    window.open(url, '_blank');
+  }
+
 }

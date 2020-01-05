@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CurrentNewsService } from './current-news.service';
-import { LatestNews } from './current-news.interface';
+import { LatestNews, News } from './current-news.interface';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentNewsService.fetchLatestNews();
+  }
+
+  openNewTab(news: News, event: Event): void {
+    event.preventDefault();
+    this.currentNewsService.openNewTab(news.url);
   }
 
 }

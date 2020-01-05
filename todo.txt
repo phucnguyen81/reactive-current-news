@@ -1,5 +1,3 @@
-# Let 'Read More' open a new tab
-
 # Check out examples/ideas for news feed
 -   https://news.google.com
 -   https://www.newsweek.com/newsfeed
