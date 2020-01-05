@@ -1,8 +1,8 @@
+# Replace the angular material avatar with currents_api logo
+
 # Check out examples/ideas for news feed
 -   https://news.google.com
 -   https://www.newsweek.com/newsfeed
-
-# Replace the avatar
 
 # Show error messages (as modal dialog?)
 
