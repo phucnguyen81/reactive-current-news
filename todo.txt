@@ -1,4 +1,23 @@
-# Try out the API
+# Let 'Read More' open a new tab
 
-- Check out how angular support api
-- Write code to do it
+# Check out examples/ideas for news feed
+-   https://news.google.com
+-   https://www.newsweek.com/newsfeed
+
+# Replace the avatar
+
+# Show error messages (as modal dialog?)
+
+# Firebase (free plan) as data store
+
+# 'Not again' buttons
+On 'Not again', remove the news card and load
+a new one in. Need to persist news cards.
+
+# Refresh button => no, always have a fixed number of news available
+
+# Watch out for rate limit
+
+# Create top banner (for name, logo, search)
+See 'https://news.google.com'
+
