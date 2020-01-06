@@ -8,3 +8,7 @@ export class LatestNewsEvent extends AppEvent {
     super();
   }
 }
+
+export class FetchLatestNewsEvent extends AppEvent { }
+
+export class CancelFetchingLatestNewsEvent extends AppEvent { }

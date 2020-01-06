@@ -1,4 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef
+} from '@angular/core';
 
 import * as ops from 'rxjs/operators';
 
@@ -18,10 +20,17 @@ export class AppComponent implements OnInit, OnDestroy {
     ops.map(state => state.latestNews)
   );
 
-  constructor(private currentNewsService: CurrentNewsService) {}
+  constructor(
+    private currentNewsService: CurrentNewsService,
+    private changeDetector: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
     this.currentNewsService.fetchLatestNews();
+    this.changeDetector.detectChanges();
   }
 
   ngOnDestroy(): void {

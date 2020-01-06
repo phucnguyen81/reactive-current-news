@@ -4,6 +4,8 @@
 
 # Prevent doing multiple fetches at the same time
 
+# Add event error and its usage
+
 # Add timeout for fetching news from the Observable side
 
 # Check out examples/ideas for news feed
