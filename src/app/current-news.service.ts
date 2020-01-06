@@ -9,6 +9,10 @@ import * as ops from 'rxjs/operators';
 import { LatestNews } from './current-news.interface';
 import { LatestNewsResponse } from './current-news.adapter';
 
+import { CurrentNewsState } from './current-news.state';
+import { AppEvent, LatestNewsEvent } from './current-news.events';
+import { nextState } from './current-news.reducers';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,9 +20,22 @@ export class CurrentNewsService {
 
   constructor(private httpClient:HttpClient) {}
 
-  readonly latestNews$ = new rx.ReplaySubject<LatestNews>(1);
-  readonly latestNewsError$ = new rx.ReplaySubject<HttpErrorResponse>(1);
-  readonly latestNewsCancel$ = new rx.Subject<any>();
+  private readonly latestNews$ = new rx.ReplaySubject<LatestNews>(1);
+  private readonly latestNewsError$ = new rx.ReplaySubject<HttpErrorResponse>(1);
+  private readonly latestNewsCancel$ = new rx.Subject<any>();
+
+  private readonly stateLoop$ = new rx.Subject<CurrentNewsState>();
+
+  readonly state$: rx.Observable<CurrentNewsState> = rx.merge(
+    this.latestNews$.pipe(ops.map(v => new LatestNewsEvent(v))),
+    this.latestNewsError$.pipe(ops.mapTo(new AppEvent())),
+    this.latestNewsCancel$.pipe(ops.mapTo(new AppEvent())),
+  ).pipe(
+    ops.scan<AppEvent, CurrentNewsState>(
+      nextState, new CurrentNewsState()
+    ),
+    ops.tap(state => this.stateLoop$.next(state)),
+  );
 
   fetchLatestNews(): void {
     const url = '/current-news/v1/latest-news';

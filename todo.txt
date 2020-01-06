@@ -1,6 +1,10 @@
-# [x] Extract the control from the service
+# Extract the control out of the service
 
-# Apply merge-scan pattern on the control
+# Turn on/off the control
+
+# Prevent doing multiple fetches at the same time
+
+# Add timeout for fetching news from the Observable side
 
 # Check out examples/ideas for news feed
 -   https://news.google.com
@@ -9,13 +13,9 @@
 # Configuration feature for setting apiKey and language
 -   Local storate to save configurations?
 
-# Add state canFetchNews
-
 # Show warning if rate limit drops under a threshold
 
 # Show error messages (as modal dialog?)
-
-# Firebase (free plan) as data store
 
 # 'Not again' buttons
 On 'Not again', remove the news card and load
@@ -25,4 +25,6 @@ a new one in. Need to persist news cards.
 
 # Create top banner (for name, logo, search)
 See 'https://news.google.com'
+
+# Firebase (free plan) as data store
 
