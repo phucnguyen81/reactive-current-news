@@ -11,8 +11,9 @@ import { LatestNews } from './current-news.interface';
  * Basic control of the currentsapi.services.
  *
  *  -   Fetch latest news
- *  -   Show stream of latest news results
- *  -   Show errors from fetching
+ *  -   Notify latest news results
+ *  -   Notify errors from fetching
+ *  -   Notify completion of fetching
  *  -   Cancel all on-going fetches
  */
 export class CurrentsApiPlant {
@@ -20,6 +21,7 @@ export class CurrentsApiPlant {
   private readonly latestNews$ = new rx.Subject<LatestNews>();
   private readonly latestNewsError$ = new rx.Subject<HttpErrorResponse>();
   private readonly latestNewsCancel$ = new rx.Subject<any>();
+  private readonly latestNewsComplete$ = new rx.Subject<any>();
 
   readonly latestNewsOut$: Observable<LatestNews> = this.latestNews$.asObservable();
   readonly latestNewsErrorOut$: Observable<HttpErrorResponse> = this.latestNewsError$.asObservable();
@@ -34,17 +36,12 @@ export class CurrentsApiPlant {
 
     this.httpClient
       .get<LatestNews>(url, {observe: 'response', params, headers})
-      .pipe(
-        ops.tap(res => this.latestNews$.next(res)),
-        ops.catchError<LatestNews, rx.Observable<LatestNews>>(
-          (err, caught) => {
-            this.latestNewsError$.next(err);
-            return caught;
-          }
-        ),
-        ops.takeUntil(this.latestNewsCancel$),
-      )
-      .subscribe();
+      .pipe(ops.takeUntil(this.latestNewsCancel$))
+      .subscribe({
+        next: latestNews => this.latestNews$.next(latestNews),
+        error: err => this.latestNewsError$.next(err),
+        complete: () => this.latestNewsComplete$.next(true),
+      });
   }
 
   cancelLatestNews(): void {
