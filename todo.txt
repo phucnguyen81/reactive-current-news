@@ -1,3 +1,11 @@
+# Extract the api plant out of the service
+
+API plant:
+-   Fetch latest news
+-   Show stream of latest news results
+-   Show errors from fetching
+-   Cancel all on-going fetches
+
 # Extract the control out of the service
 
 # Turn on/off the control
@@ -6,14 +14,14 @@
 
 # Add event error and its usage
 
-# Add timeout for fetching news from the Observable side
+# Add timeout for fetching news (from HttpClient and from currentsapi.plant)
 
 # Check out examples/ideas for news feed
 -   https://news.google.com
 -   https://www.newsweek.com/newsfeed
 
-# Configuration feature for setting apiKey and language
--   Local storate to save configurations?
+# Configure apiKey and language
+-   Local storage or db api for configurations?
 
 # Show warning if rate limit drops under a threshold
 
