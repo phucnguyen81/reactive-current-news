@@ -1,5 +1,5 @@
 import {
-  HttpClient, HttpParams, HttpErrorResponse, HttpHeaders
+  HttpClient, HttpParams, HttpResponse, HttpErrorResponse, HttpHeaders
 } from '@angular/common/http';
 
 import * as rx from 'rxjs';
@@ -18,13 +18,13 @@ import { LatestNews } from './current-news.interface';
  */
 export class CurrentsApiPlant {
 
-  private readonly latestNews$ = new rx.Subject<LatestNews>();
+  private readonly latestNews$ = new rx.Subject<HttpResponse<LatestNews>>();
   private readonly latestNewsError$ = new rx.Subject<HttpErrorResponse>();
   private readonly latestNewsCancel$ = new rx.Subject<any>();
   private readonly latestNewsComplete$ = new rx.Subject<any>();
 
-  readonly latestNewsOut$: Observable<LatestNews> = this.latestNews$.asObservable();
-  readonly latestNewsErrorOut$: Observable<HttpErrorResponse> = this.latestNewsError$.asObservable();
+  readonly latestNewsOut$ = this.latestNews$.asObservable();
+  readonly latestNewsErrorOut$ = this.latestNewsError$.asObservable();
 
   constructor(private httpClient: HttpClient) {}
 
