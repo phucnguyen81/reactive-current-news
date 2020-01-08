@@ -25,6 +25,7 @@ export class CurrentsApiPlant {
 
   readonly latestNewsOut$ = this.latestNews$.asObservable();
   readonly latestNewsErrorOut$ = this.latestNewsError$.asObservable();
+  readonly latestNewsCompleteOut$ = this.latestNewsComplete$.asObservable();
 
   constructor(private httpClient: HttpClient) {}
 

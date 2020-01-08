@@ -17,10 +17,7 @@ import { CurrentNewsState } from './current-news.state';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Current News';
 
-  latestNews$: rx.Observable<LatestNews> =
-    this.currentNewsService.output$.pipe(
-      ops.map(state => state.latestNews)
-    );
+  view$ = this.currentNewsService.output$;
 
   constructor(
     private currentNewsService: CurrentNewsService,

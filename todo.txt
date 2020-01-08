@@ -1,10 +1,8 @@
 # Extract the api plant out of the service
 
 API plant:
--   Fetch latest news
--   Show stream of latest news results
--   Show errors from fetching
--   Cancel all on-going fetches
+-   Input: Fetch latest news, cancel on-going fetches
+-   Output: latest news, errors
 
 # Extract the control out of the service
 
@@ -22,6 +20,8 @@ API plant:
 
 # Configure apiKey and language
 -   Local storage or db api for configurations?
+
+# Add 'Refresh' button to the toolbar
 
 # Show warning if rate limit drops under a threshold
 

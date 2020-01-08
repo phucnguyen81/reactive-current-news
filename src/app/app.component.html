@@ -1,23 +1,30 @@
-<ng-container *ngIf="latestNews$ | async as latestNews">
-  <div>Today remaining requests: {{latestNews.rateLimitRemaining}}</div>
-  <mat-card class="example-card" *ngFor="let news of latestNews.news">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{news.title}}</mat-card-title>
-      <mat-card-subtitle>Author: {{news.author}}</mat-card-subtitle>
-      <mat-card-subtitle>Category: {{news.category}}</mat-card-subtitle>
-    </mat-card-header>
-    <div *ngIf="news.image">
-      <img mat-card-image src="{{news.image}}" alt="{{news.title}}">
+<ng-container *ngIf="view$ | async as view">
+  <ng-container *ngIf="view.latestNews as latestNews">
+    <div>
+      Today remaining requests: {{latestNews.rateLimitRemaining}}
     </div>
-    <mat-card-content>
-      <p>{{news.description}}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <a mat-button href="{{news.url}}"
-        (click)="openNewTab(news, $event)">
-        Read More
-      </a>
-    </mat-card-actions>
-  </mat-card>
+    <div *ngIf="view.latestNewsError">
+      Error: {{view.latestNewsError}}
+    </div>
+    <mat-card class="example-card" *ngFor="let news of latestNews.news">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{news.title}}</mat-card-title>
+        <mat-card-subtitle>Author: {{news.author}}</mat-card-subtitle>
+        <mat-card-subtitle>Category: {{news.category}}</mat-card-subtitle>
+      </mat-card-header>
+      <div *ngIf="news.image">
+        <img mat-card-image src="{{news.image}}" alt="{{news.title}}">
+      </div>
+      <mat-card-content>
+        <p>{{news.description}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button href="{{news.url}}"
+          (click)="openNewTab(news, $event)">
+          Read More
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
 </ng-container>

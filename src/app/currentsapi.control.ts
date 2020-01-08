@@ -8,7 +8,7 @@ import { LatestNewsResponse } from './current-news.adapter';
 
 /**
  * Drive currentsapi plant from output of current-news control.
- * The output can be fed back to the control.
+ * The output can become feedback of the current-news control.
  */
 export class CurrentsApiControl {
 
@@ -36,16 +36,21 @@ export class CurrentsApiControl {
       ops.map(latestNews => new events.ReceiveLatestNews(latestNews)),
     );
 
-  // TODO show errors
   private readonly latestNewsError$: rx.Observable<events.AppEvent> =
     this.currentsapi.latestNewsErrorOut$.pipe(
-      ops.mapTo(new events.AppEvent())
+      ops.map(err => new events.LatestNewsError(err.message))
+    );
+
+  private readonly latestNewsComplete$: rx.Observable<events.AppEvent> =
+    this.currentsapi.latestNewsCompleteOut$.pipe(
+      ops.mapTo(new events.CompleteFetchingLatestNews())
     );
 
   readonly output$: rx.Observable<events.AppEvent> = rx.merge(
     this.fetchLatestNews$,
     this.receiveLatestNews$,
     this.latestNewsError$,
+    this.latestNewsComplete$
   );
 
   constructor(
