@@ -8,6 +8,7 @@ import { LatestNewsResponse } from './current-news.adapter';
 
 /**
  * Drive currentsapi plant from output of current-news control.
+ * The output can be fed back to the control.
  */
 export class CurrentsApiControl {
 
