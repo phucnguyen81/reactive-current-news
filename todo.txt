@@ -1,20 +1,18 @@
-# Make the cards with round corners
+# Create the spec (all use cases)
 
-# Make the cards with margin/padding
+# Create statecharts for the app (from the spec)
+
+# Make openNewTab an event
 
 # Use an icon for 'Today remaining requests'
 
 # Add menus to the top toolbar
 See https://news.google.com
 
-# Add config to the top toolbar
+# Add configs to the top toolbar
 See https://news.google.com
 
 # Add search box to the top toolbar
-
-# Create the spec (all use cases)
-
-# Create statecharts for the app (from the spec)
 
 # Add 'Refresh' button to the toolbar
 
@@ -26,6 +24,8 @@ See https://news.google.com
 
 # Configure apiKey and language
 Use local storage as data store for keeping settings
+
+# Configure material themes
 
 # Show app title 'Current News' as part of settings
 

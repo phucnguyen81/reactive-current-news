@@ -13,47 +13,29 @@ import * as events from './current-news.events';
 import { nextState } from './current-news.reducers';
 import { CurrentsApiControl } from './currentsapi.control';
 
+import { CurrentNewsControl } from './current-news.control';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentNewsService {
 
-  private readonly state$ = new rx.Subject<CurrentNewsState>();
+  private readonly control = new CurrentNewsControl(this.httpClient);
 
-  private readonly currentsapi$ = new CurrentsApiControl(
-    this.state$,
-    new CurrentsApiPlant(this.httpClient)
-  );
-
-  private readonly feedback$ = rx.merge(
-    this.currentsapi$.output$
-  );
-
-  private readonly input$ = new rx.Subject<events.AppEvent>();
-
-  readonly output$: rx.Observable<CurrentNewsState> = rx.merge(
-    this.input$,
-    this.feedback$,
-  ).pipe(
-    ops.scan<events.AppEvent, CurrentNewsState>(
-      nextState, new CurrentNewsState()
-    ),
-    ops.tap(state => this.state$.next(state)),
-  );
+  readonly output$ = this.control.output$;
 
   constructor(private httpClient:HttpClient) {}
 
   fetchLatestNews(): void {
-    this.input$.next(new events.FetchLatestNews());
+    this.control.fetchLatestNews();
   }
 
   cancelLatestNews(): void {
-    this.input$.next(new events.CancelFetchingLatestNews());
+    this.control.cancelLatestNews();
   }
 
-  // TODO make this event too (with window plant?)
   openNewTab(url: string): void {
-    window.open(url, '_blank');
+    this.control.openNewTab(url);
   }
 
 }
