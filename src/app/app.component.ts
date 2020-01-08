@@ -2,6 +2,7 @@ import {
   Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef
 } from '@angular/core';
 
+import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
 import { CurrentNewsService } from './current-news.service';
@@ -16,9 +17,10 @@ import { CurrentNewsState } from './current-news.state';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Current News';
 
-  latestNews$ = this.currentNewsService.state$.pipe(
-    ops.map(state => state.latestNews)
-  );
+  latestNews$: rx.Observable<LatestNews> =
+    this.currentNewsService.output$.pipe(
+      ops.map(state => state.latestNews)
+    );
 
   constructor(
     private currentNewsService: CurrentNewsService,

@@ -11,38 +11,34 @@ import { CurrentsApiPlant } from './currentsapi.plant';
 import { CurrentNewsState } from './current-news.state';
 import * as events from './current-news.events';
 import { nextState } from './current-news.reducers';
-import { fetchLatestNews } from './currentsapi.adapter';
+import { CurrentsApiControl } from './currentsapi.control';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentNewsService {
 
-  private readonly currentsapi = new CurrentsApiPlant(this.httpClient);
+  private readonly state$ = new rx.Subject<CurrentNewsState>();
 
-  private readonly stateLoop$ = new rx.Subject<CurrentNewsState>();
+  private readonly currentsapi$ = new CurrentsApiControl(
+    this.state$,
+    new CurrentsApiPlant(this.httpClient)
+  );
 
-  private readonly fetchLatestNews$ = this.stateLoop$.pipe(
-    fetchLatestNews(this.currentsapi)
+  private readonly feedback$ = rx.merge(
+    this.currentsapi$.output$
   );
 
   private readonly input$ = new rx.Subject<events.AppEvent>();
 
-  readonly state$: rx.Observable<CurrentNewsState> = rx.merge(
+  readonly output$: rx.Observable<CurrentNewsState> = rx.merge(
     this.input$,
-    this.fetchLatestNews$,
-    this.currentsapi.latestNewsOut$.pipe(
-      ops.map(latestNews => new LatestNewsResponse(latestNews)),
-      ops.map(latestNews => new events.ReceiveLatestNews(latestNews)),
-    ),
-    this.currentsapi.latestNewsErrorOut$.pipe(
-      ops.mapTo(new events.AppEvent())
-    ),
+    this.feedback$,
   ).pipe(
     ops.scan<events.AppEvent, CurrentNewsState>(
       nextState, new CurrentNewsState()
     ),
-    ops.tap(state => this.stateLoop$.next(state)),
+    ops.tap(state => this.state$.next(state)),
   );
 
   constructor(private httpClient:HttpClient) {}
