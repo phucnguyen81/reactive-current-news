@@ -1,9 +1,16 @@
-# Create top banner (for name, logo, search)
-See 'https://news.google.com'
+# Make the cards with round corners
 
-# Check out examples/ideas for news feed
--   https://news.google.com
--   https://www.newsweek.com/newsfeed
+# Make the cards with margin/padding
+
+# Use an icon for 'Today remaining requests'
+
+# Add menus to the top toolbar
+See https://news.google.com
+
+# Add config to the top toolbar
+See https://news.google.com
+
+# Add search box to the top toolbar
 
 # Create the spec (all use cases)
 
@@ -33,4 +40,8 @@ be tested manually.
 # 'Not again' buttons
 On 'Not again', remove the news card and load
 a new one in. Need to persist news cards.
+
+# Check out examples/ideas for news feed
+-   https://news.google.com
+-   https://www.newsweek.com/newsfeed
 
