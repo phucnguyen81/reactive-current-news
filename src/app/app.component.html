@@ -1,8 +1,12 @@
 <ng-container *ngIf="view$ | async as view">
   <ng-container *ngIf="view.latestNews as latestNews">
-    <div>
-      Today remaining requests: {{latestNews.rateLimitRemaining}}
-    </div>
+    <mat-toolbar class="fixed-header" color="primary">
+      <span>{{title}}</span>
+      <span class="example-fill-remaining-space"></span>
+      <span>Today remaining requests: {{latestNews.rateLimitRemaining}}</span>
+    </mat-toolbar>
+    <!-- Add an empty toolbar to create offset with the same height -->
+    <mat-toolbar></mat-toolbar>
     <div *ngIf="view.latestNewsError">
       Error: {{view.latestNewsError}}
     </div>
