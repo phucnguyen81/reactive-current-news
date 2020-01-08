@@ -26,12 +26,12 @@ export class CurrentNewsService {
 
   constructor(private httpClient:HttpClient) {}
 
-  fetchLatestNews(): void {
-    this.control.fetchLatestNews();
+  start(): void {
+    this.control.start();
   }
 
-  cancelLatestNews(): void {
-    this.control.cancelLatestNews();
+  stop(): void {
+    this.control.stop();
   }
 
   openNewTab(url: string): void {

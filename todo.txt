@@ -1,3 +1,5 @@
+# Present on/off state for the control
+
 # Create the spec (all use cases)
 
 # Create statecharts for the app (from the spec)
@@ -19,8 +21,6 @@ See https://news.google.com
 # Show better error messages (as popup or special card?)
 
 # Show warning if rate limit drops under a threshold
-
-# Start/stop the control, not fetch/cancel
 
 # Configure apiKey and language
 Use local storage as data store for keeping settings

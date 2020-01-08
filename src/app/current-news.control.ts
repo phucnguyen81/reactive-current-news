@@ -40,11 +40,11 @@ export class CurrentNewsControl {
 
   constructor(private httpClient:HttpClient) {}
 
-  fetchLatestNews(): void {
+  start(): void {
     this.input$.next(new events.FetchLatestNews());
   }
 
-  cancelLatestNews(): void {
+  stop(): void {
     this.input$.next(new events.CancelFetchingLatestNews());
   }
 

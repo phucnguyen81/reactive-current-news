@@ -28,12 +28,12 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.currentNewsService.fetchLatestNews();
+    this.currentNewsService.start();
     this.changeDetector.detectChanges();
   }
 
   ngOnDestroy(): void {
-    this.currentNewsService.cancelLatestNews();
+    this.currentNewsService.stop();
   }
 
   openNewTab(news: News, event: Event): void {
