@@ -3,12 +3,15 @@ import { LatestNews } from './current-news.interface';
 export class AppEvent {
 }
 
-export class LatestNewsEvent extends AppEvent {
+export class Skip extends AppEvent {
+}
+
+export class ReceiveLatestNews extends AppEvent {
   constructor(public latestNews: LatestNews) {
     super();
   }
 }
 
-export class FetchLatestNewsEvent extends AppEvent { }
+export class FetchLatestNews extends AppEvent { }
 
-export class CancelFetchingLatestNewsEvent extends AppEvent { }
+export class CancelFetchingLatestNews extends AppEvent { }
