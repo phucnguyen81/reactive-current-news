@@ -20,14 +20,11 @@ describe('CurrentNewsService', () => {
   it('should get either response or error from api', (done: DoneFn) => {
     const service: CurrentNewsService = TestBed.get(CurrentNewsService);
 
-    rx.merge(
-      service.latestNews$,
-      service.latestNewsError$
-    ).subscribe(result => {
+    service.output$.subscribe(result => {
       expect(result).toBeTruthy();
       done();
     });
 
-    service.fetchLatestNews();
+    service.start();
   });
 });
