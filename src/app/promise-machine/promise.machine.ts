@@ -20,9 +20,9 @@ export function testPromiseMachine() {
     }
   });
 
-  const promiseService = interpret(promiseMachine).onTransition(state =>
+  const promiseService = interpret(promiseMachine).onTransition(state => {
     console.log(state.value)
-  );
+  });
 
   // Start the service
   promiseService.start();

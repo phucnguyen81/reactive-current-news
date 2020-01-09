@@ -11,6 +11,10 @@
 # Add menus to the top toolbar
 See https://news.google.com
 
+# Consolidate dev/test dependencies
+Probably create a shared module containing the material modules to use.
+The shared module is used in both dev and test code.
+
 # Add configs to the top toolbar
 See https://news.google.com
 
