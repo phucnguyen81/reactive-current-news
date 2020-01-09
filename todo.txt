@@ -1,4 +1,4 @@
-# Present on/off state for the control
+# Use xstate to model state
 
 # Create the spec (all use cases)
 
