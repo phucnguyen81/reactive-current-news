@@ -8,7 +8,6 @@ import {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-  title = 'Current News';
 
   constructor() { }
 

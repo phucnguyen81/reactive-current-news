@@ -1,7 +1,7 @@
 <ng-container *ngIf="view$ | async as view">
   <ng-container *ngIf="view.latestNews as latestNews">
     <mat-toolbar class="fixed-header" color="primary">
-      <span>{{title}}</span>
+      <span>{{view.title}}</span>
       <span class="example-fill-remaining-space"></span>
       <span>Today remaining requests: {{latestNews.rateLimitRemaining}}</span>
     </mat-toolbar>

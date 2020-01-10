@@ -1,8 +1,13 @@
-# Add SettingsComponent
+# Add the Fetch button to do a new fetch
 
-# Add Settings tab for SettingsComponent
+# Move the toolbar out of current-news component
+The toolbar is shared between all tabs/components.
 
-# Add input for apiKey in Settings tab
+# Add Settings component
+
+# Add Settings tab for Settings component
+
+# Add apiKey for Settings
 
 # Learn xstate using this repo for awhile
 
@@ -23,6 +28,8 @@
 # Show better error messages (as popup or special card?)
 
 # Show warning if rate limit drops under a threshold
+
+# Abstract away the HttpClient
 
 # Configure apiKey and language
 Use local storage as data store for keeping settings
