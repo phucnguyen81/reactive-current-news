@@ -14,18 +14,15 @@ import { CurrentNewsState } from './current-news.state';
 })
 export class CurrentNewsComponent implements OnInit, OnDestroy {
 
-  view$ = this.currentNewsService.output$;
+  view$: rx.Observable<CurrentNewsState>;
 
-  constructor(private currentNewsService: CurrentNewsService) {}
-
-  ngOnInit(): void {
-    this.currentNewsService.start();
+  constructor(private currentNewsService: CurrentNewsService) {
+    this.view$ = this.currentNewsService.output$;
   }
 
-  ngOnDestroy(): void {
-    this.currentNewsService.stop();
-    this.currentNewsService.finish();
-  }
+  ngOnInit(): void { }
+
+  ngOnDestroy(): void { }
 
   openNewTab(news: News, event: Event): void {
     event.preventDefault();
