@@ -1,4 +1,5 @@
-# Add the Fetch button to do a new fetch
+# Subscribe to state$ on start (in current-news.control)
+-   Then we can remove the change detection in AfterViewInit
 
 # Move the toolbar out of current-news component
 The toolbar is shared between all tabs/components.

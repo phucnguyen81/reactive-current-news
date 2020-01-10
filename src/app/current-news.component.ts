@@ -40,4 +40,8 @@ export class CurrentNewsComponent implements OnInit, OnDestroy {
     this.currentNewsService.openNewTab(news.url);
   }
 
+  fetch(): void {
+    this.currentNewsService.fetchLatestNews();
+  }
+
 }

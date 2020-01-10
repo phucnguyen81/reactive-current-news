@@ -27,6 +27,10 @@ export class CurrentNewsService {
     this.control.stop();
   }
 
+  fetchLatestNews(): void {
+    this.control.fetchLatestNews();
+  }
+
   openNewTab(url: string): void {
     this.control.openNewTab(url);
   }
