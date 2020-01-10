@@ -1,10 +1,14 @@
-# Use xstate to model state
+# Add Settings tab
 
-# Create the spec (all use cases)
+# Add input for apiKey in Settings tab
 
-# Create statecharts for the app (from the spec)
+# Learn xstate using this repo for awhile
 
-# Make openNewTab an event
+# Create use cases
+
+# Create dataflow for the app
+
+# Make OpenNewTab event
 
 # Use an icon for 'Today remaining requests'
 
