@@ -28,6 +28,7 @@ export class CurrentNewsService {
 
   start(): void {
     this.control.start();
+    this.control.fetchLatestNews();
   }
 
   stop(): void {

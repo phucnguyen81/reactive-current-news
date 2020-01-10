@@ -4,7 +4,24 @@ import { CurrentNewsState } from './current-news.state';
 export function nextState(
   state: CurrentNewsState, event: events.AppEvent
 ): CurrentNewsState {
-  if ((event instanceof events.FetchLatestNews)) {
+  if (state.isOn) {
+    return On_nextState(state, event);
+  }
+  else {
+    return Off_nextState(state, event);
+  }
+}
+
+function On_nextState(
+  state: CurrentNewsState, event: events.AppEvent
+): CurrentNewsState {
+  if (event instanceof events.Stop) {
+    return {
+      ...state,
+      isOn: false,
+    };
+  }
+  else if ((event instanceof events.FetchLatestNews)) {
     // do fetching only one at a time
     if (!state.fetchingLatestNews) {
       return {
@@ -39,4 +56,18 @@ export function nextState(
   }
 
   return state;
+}
+
+function Off_nextState(
+  state: CurrentNewsState, event: events.AppEvent
+): CurrentNewsState {
+  if (event instanceof events.Start) {
+    return {
+      ...state,
+      isOn: true,
+    };
+  }
+  else {
+    return state;
+  }
 }

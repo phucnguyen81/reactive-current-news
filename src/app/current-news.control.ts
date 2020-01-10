@@ -41,11 +41,16 @@ export class CurrentNewsControl {
   constructor(private httpClient:HttpClient) {}
 
   start(): void {
+    this.input$.next(new events.Start());
+  }
+
+  fetchLatestNews(): void {
     this.input$.next(new events.FetchLatestNews());
   }
 
   stop(): void {
     this.input$.next(new events.CancelFetchingLatestNews());
+    this.input$.next(new events.Stop());
   }
 
   openNewTab(url: string): void {

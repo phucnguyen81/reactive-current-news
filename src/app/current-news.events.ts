@@ -1,11 +1,13 @@
 import { LatestNews } from './current-news.interface';
 
-export class AppEvent {
-}
+export class AppEvent { }
+
+export class Start extends AppEvent { }
+
+export class Stop extends AppEvent { }
 
 // TODO probably not needed, use skipWhile operator instead
-export class Skip extends AppEvent {
-}
+export class Skip extends AppEvent { }
 
 export class ReceiveLatestNews extends AppEvent {
   constructor(public latestNews: LatestNews) {
