@@ -4,7 +4,9 @@
       <button mat-button>{{view.title}}</button>
       <button mat-button (click)="fetch()">Fetch</button>
       <span class="example-fill-remaining-space"></span>
-      <span>Today remaining requests: {{latestNews.rateLimitRemaining}}</span>
+      <button mat-button>
+        Today remaining requests: {{latestNews.rateLimitRemaining}}
+      </button>
     </mat-toolbar>
     <!-- Add an empty toolbar to create offset with the same height -->
     <mat-toolbar></mat-toolbar>
