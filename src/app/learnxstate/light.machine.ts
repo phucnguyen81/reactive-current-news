@@ -1,5 +1,22 @@
 import { Machine, interpret } from 'xstate';
 
+const pedestrianStates = {
+  initial: 'walk',
+  states: {
+    walk: {
+      on: {
+        PED_TIMER: 'wait'
+      }
+    },
+    wait: {
+      on: {
+        PED_TIMER: 'stop'
+      }
+    },
+    stop: {}
+  }
+};
+
 const lightMachine = Machine({
   id: 'light',
   initial: 'green',
@@ -17,7 +34,8 @@ const lightMachine = Machine({
     red: {
       on: {
         TIMER: 'green'
-      }
+      },
+      ...pedestrianStates
     }
   }
 });

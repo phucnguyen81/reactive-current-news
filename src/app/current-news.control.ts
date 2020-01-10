@@ -44,13 +44,16 @@ export class CurrentNewsControl {
     this.input$.next(new events.Start());
   }
 
+  stop(): void {
+    this.input$.next(new events.Stop());
+  }
+
   fetchLatestNews(): void {
     this.input$.next(new events.FetchLatestNews());
   }
 
-  stop(): void {
+  cancelFetchingLatestNews(): void {
     this.input$.next(new events.CancelFetchingLatestNews());
-    this.input$.next(new events.Stop());
   }
 
   openNewTab(url: string): void {
