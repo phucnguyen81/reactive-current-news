@@ -1,7 +1,3 @@
-# Extract component CurrentsNewComponent out of AppComponent
-
-# Show CurrentsNewComponent with router
-
 # Add SettingsComponent
 
 # Add Settings tab for SettingsComponent

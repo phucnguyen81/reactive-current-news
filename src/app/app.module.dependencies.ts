@@ -17,6 +17,8 @@ import {
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
 import { CurrentNewsComponent } from './current-news.component';
 
 
@@ -30,6 +32,7 @@ export const APP_MODULE_DECLARATIONS = [
 ];
 
 export const APP_MODULE_IMPORTS = [
+  AppRoutingModule,
   BrowserModule,
   BrowserAnimationsModule,
   HttpClientModule,
