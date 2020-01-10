@@ -17,6 +17,7 @@ import {
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
+import { CurrentNewsComponent } from './current-news.component';
 
 
 export const APP_MODULE_BOOTSTRAP = [
@@ -25,6 +26,7 @@ export const APP_MODULE_BOOTSTRAP = [
 
 export const APP_MODULE_DECLARATIONS = [
   AppComponent,
+  CurrentNewsComponent,
 ];
 
 export const APP_MODULE_IMPORTS = [

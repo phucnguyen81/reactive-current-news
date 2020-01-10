@@ -1,44 +1,24 @@
 import {
-  Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef
+  Component, OnInit, OnDestroy, AfterViewInit
 } from '@angular/core';
-
-import * as rx from 'rxjs';
-import * as ops from 'rxjs/operators';
-
-import { CurrentNewsService } from './current-news.service';
-import { LatestNews, News } from './current-news.interface';
-import { CurrentNewsState } from './current-news.state';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   title = 'Current News';
 
-  view$ = this.currentNewsService.output$;
-
-  constructor(
-    private currentNewsService: CurrentNewsService,
-    private changeDetector: ChangeDetectorRef,
-  ) {}
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    this.currentNewsService.start();
-    this.changeDetector.detectChanges();
   }
 
   ngOnDestroy(): void {
-    this.currentNewsService.stop();
-  }
-
-  openNewTab(news: News, event: Event): void {
-    event.preventDefault();
-    this.currentNewsService.openNewTab(news.url);
   }
 
 }

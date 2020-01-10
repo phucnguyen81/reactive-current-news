@@ -1,4 +1,10 @@
-# Add Settings tab
+# Extract component CurrentsNewComponent out of AppComponent
+
+# Show CurrentsNewComponent with router
+
+# Add SettingsComponent
+
+# Add Settings tab for SettingsComponent
 
 # Add input for apiKey in Settings tab
 
@@ -6,21 +12,17 @@
 
 # Create use cases
 
-# Create dataflow for the app
+# Describe the app dataflow
+
+# Describe the app main control with statecharts
 
 # Make OpenNewTab event
 
 # Use an icon for 'Today remaining requests'
 
-# Add menus to the top toolbar
-See https://news.google.com
-
-# Add configs to the top toolbar
-See https://news.google.com
-
 # Add search box to the top toolbar
 
-# Add 'Refresh' button to the toolbar
+# Add 'Fetch' button to the toolbar
 
 # Show better error messages (as popup or special card?)
 
@@ -31,9 +33,7 @@ Use local storage as data store for keeping settings
 
 # Configure material themes
 
-# Show app title 'Current News' as part of settings
-
-# Add timeout for fetching news
+# Add timeout settings for fetching news
 -   Timeout for HttpClient
 -   Timeout for currentsapi
 
@@ -41,9 +41,9 @@ Use local storage as data store for keeping settings
 Done at the code level, but let's do the refresh button first so that this can
 be tested manually.
 
-# 'Not again' buttons
-On 'Not again', remove the news card and load
-a new one in. Need to persist news cards.
+# Maintain a fixed number of news cards on screen
+When the on-screen news cards drop below a certain threshold, fill it up with
+new/available news cards
 
 # Check out examples/ideas for news feed
 -   https://news.google.com

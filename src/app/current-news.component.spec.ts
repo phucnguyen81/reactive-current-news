@@ -1,7 +1,7 @@
-import { TestBed, async } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { AppComponent } from './app.component';
+import { CurrentNewsComponent } from './current-news.component';
 
 import {
   APP_MODULE_BOOTSTRAP,
@@ -10,7 +10,7 @@ import {
 } from './app.module.dependencies';
 
 
-describe('AppComponent', () => {
+describe('CurrentNewsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -19,19 +19,15 @@ describe('AppComponent', () => {
       ],
       declarations: [
         ...APP_MODULE_DECLARATIONS,
+        CurrentNewsComponent,
       ],
     }).compileComponents();
   }));
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    const fixture = TestBed.createComponent(CurrentNewsComponent);
+    const comp = fixture.debugElement.componentInstance;
+    expect(comp).toBeTruthy();
   });
 
-  it(`should have as title 'Current News'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const comp = fixture.debugElement.componentInstance;
-    expect(comp.title).toEqual('Current News');
-  });
 });
