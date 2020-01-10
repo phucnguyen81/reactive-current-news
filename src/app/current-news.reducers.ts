@@ -1,14 +1,17 @@
 import * as events from './current-news.events';
-import { CurrentNewsState } from './current-news.state';
+import { CurrentNewsState, On, Off } from './current-news.state';
 
 export function nextState(
   state: CurrentNewsState, event: events.AppEvent
 ): CurrentNewsState {
-  if (state.isOn) {
+  if (state.state instanceof On) {
     return On_nextState(state, event);
   }
-  else {
+  else if (state.state instanceof Off) {
     return Off_nextState(state, event);
+  }
+  else {
+    return state;
   }
 }
 
@@ -18,7 +21,7 @@ function On_nextState(
   if (event instanceof events.Stop) {
     return {
       ...state,
-      isOn: false,
+      state: new Off(),
     };
   }
   else if ((event instanceof events.FetchLatestNews)) {
@@ -64,7 +67,7 @@ function Off_nextState(
   if (event instanceof events.Start) {
     return {
       ...state,
-      isOn: true,
+      state: new On(),
     };
   }
   else {

@@ -1,14 +1,16 @@
 import { LatestNews } from './current-news.interface';
 
 export class CurrentNewsState {
-  isOn = false;
+  state: On | Off = new Off();
 
-  // TODO have default empty latest news
-  latestNews?: LatestNews;
+  latestNews: LatestNews;
 
   fetchingLatestNews = false;
 
   latestNewsError = '';
 }
 
+export class On {}
+
+export class Off {}
 

@@ -23,7 +23,7 @@ export class CurrentNewsService {
   }
 
   stop(): void {
-    this.cancelFetchingLatestNews();
+    this.control.cancelFetchingLatestNews();
     this.control.stop();
   }
 
