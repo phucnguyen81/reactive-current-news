@@ -1,18 +1,30 @@
 <ng-container *ngIf="view$ | async as view">
   <ng-container *ngIf="view.latestNews as latestNews">
     <mat-toolbar class="fixed-header" color="primary">
-      <button mat-button>{{view.title}}</button>
-      <button mat-button (click)="fetch()">Fetch</button>
-      <span class="example-fill-remaining-space"></span>
-      <button mat-button>
-        Today remaining requests: {{latestNews.rateLimitRemaining}}
-      </button>
+      <mat-toolbar-row>
+        <button mat-button (click)="home()">{{view.title}}</button>
+        <button mat-button (click)="fetch()">Fetch</button>
+        <span class="example-fill-remaining-space"></span>
+        <button mat-button>
+          Today remaining requests: {{latestNews.rateLimitRemaining}}
+        </button>
+        <button mat-button (click)="settings()">
+          <mat-icon aria-hidden="false" aria-label="Application Settings">
+            settings_applications
+          </mat-icon>
+        </button>
+      </mat-toolbar-row>
+      <mat-toolbar-row *ngIf="view.latestNewsError">
+        <button mat-button>
+          <mat-error>{{view.latestNewsError}}</mat-error>
+        </button>
+      </mat-toolbar-row>
     </mat-toolbar>
-    <!-- Add an empty toolbar to create offset with the same height -->
-    <mat-toolbar></mat-toolbar>
-    <div *ngIf="view.latestNewsError">
-      Error: {{view.latestNewsError}}
-    </div>
+    <mat-toolbar>
+      <!-- Empty toolbar to create top margin -->
+      <mat-toolbar-row></mat-toolbar-row>
+      <mat-toolbar-row *ngIf="view.latestNewsError"></mat-toolbar-row>
+    </mat-toolbar>
   </ng-container>
 </ng-container>
 <router-outlet></router-outlet>

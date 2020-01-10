@@ -20,7 +20,7 @@
 
 # Add 'Fetch' button to the toolbar
 
-# Show better error messages (as popup or special card?)
+# Show error messages (as popup or special card?)
 
 # Show warning if rate limit drops under a threshold
 
@@ -47,3 +47,5 @@ new/available news cards
 -   https://news.google.com
 -   https://www.newsweek.com/newsfeed
 
+# Switch themes
+https://material.angular.io/guide/theming
