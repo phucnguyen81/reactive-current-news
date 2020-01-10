@@ -1,7 +1,3 @@
-# Consolidate dev/test dependencies
-Probably create a shared module containing all material modules in use.
-The shared module is used in both dev and test code.
-
 # Use xstate to model state
 
 # Create the spec (all use cases)

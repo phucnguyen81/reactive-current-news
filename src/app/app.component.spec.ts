@@ -1,26 +1,24 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from  '@angular/common/http';
+import {
+  APP_MODULE_BOOTSTRAP,
+  APP_MODULE_DECLARATIONS,
+  APP_MODULE_IMPORTS,
+} from './app.module.dependencies';
 
-import { MatCardModule, MatButtonModule } from '@angular/material'
-import { MatSliderModule } from '@angular/material/slider';
-import { MatToolbarModule } from '@angular/material/toolbar';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientModule,
-        MatCardModule,
-        MatButtonModule,
-        MatSliderModule,
-        MatToolbarModule,
+        ...APP_MODULE_IMPORTS,
       ],
       declarations: [
-        AppComponent
+        ...APP_MODULE_DECLARATIONS,
       ],
     }).compileComponents();
   }));

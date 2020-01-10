@@ -1,30 +1,22 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from  '@angular/common/http';
 
-import { MatCardModule, MatButtonModule } from '@angular/material'
-import { MatSliderModule } from '@angular/material/slider';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import {
+  APP_MODULE_BOOTSTRAP,
+  APP_MODULE_DECLARATIONS,
+  APP_MODULE_IMPORTS,
+} from './app.module.dependencies';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    AppComponent
+    ...APP_MODULE_DECLARATIONS
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatSliderModule,
-    MatToolbarModule,
+    ...APP_MODULE_IMPORTS
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    ...APP_MODULE_BOOTSTRAP
+  ]
 })
 export class AppModule { }
