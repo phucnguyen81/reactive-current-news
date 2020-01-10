@@ -1,9 +1,9 @@
 import { LatestNews } from './current-news.interface';
 
-export const LATEST_NEWS_SAMPLE = {
-  status: 'ok',
+export const LATEST_NEWS_SAMPLE: LatestNews = {
   rateLimitRemaining: 300,
   rateLimit: 600,
+  status: 'ok',
   news: [
     {
       author: "MEAWW",
