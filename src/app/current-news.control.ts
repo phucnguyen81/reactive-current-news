@@ -15,10 +15,12 @@ import { CurrentsApiControl } from './currentsapi.control';
 
 export class CurrentNewsControl {
 
-  private readonly state$ = new rx.Subject<CurrentNewsState>();
+  readonly output$ = new rx.BehaviorSubject<CurrentNewsState>(
+    new CurrentNewsState()
+  );
 
   private readonly currentsapi$ = new CurrentsApiControl(
-    this.state$,
+    this.output$,
     new CurrentsApiPlant(this.httpClient)
   );
 
@@ -28,17 +30,21 @@ export class CurrentNewsControl {
 
   private readonly input$ = new rx.Subject<events.AppEvent>();
 
-  readonly output$: rx.Observable<CurrentNewsState> = rx.merge(
+  private readonly finish$ = new rx.Subject<any>();
+
+  private readonly state$: rx.Observable<CurrentNewsState> = rx.merge(
     this.input$,
     this.feedback$,
   ).pipe(
     ops.scan<events.AppEvent, CurrentNewsState>(
       nextState, new CurrentNewsState()
     ),
-    ops.tap(state => this.state$.next(state)),
+    ops.takeUntil(this.finish$),
   );
 
-  constructor(private httpClient:HttpClient) {}
+  constructor(private httpClient:HttpClient) {
+    this.state$.subscribe(this.output$);
+  }
 
   start(): void {
     this.input$.next(new events.Start());
@@ -46,6 +52,10 @@ export class CurrentNewsControl {
 
   stop(): void {
     this.input$.next(new events.Stop());
+  }
+
+  finish(): void {
+    this.finish$.next(true);
   }
 
   fetchLatestNews(): void {

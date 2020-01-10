@@ -21,6 +21,7 @@ function On_nextState(
   if (event instanceof events.Stop) {
     return {
       ...state,
+      fetchingLatestNews: false,
       state: new Off(),
     };
   }

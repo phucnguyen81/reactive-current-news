@@ -1,6 +1,4 @@
-import {
-  Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
@@ -18,21 +16,15 @@ export class CurrentNewsComponent implements OnInit, OnDestroy {
 
   view$ = this.currentNewsService.output$;
 
-  constructor(
-    private currentNewsService: CurrentNewsService,
-    private changeDetector: ChangeDetectorRef,
-  ) {}
+  constructor(private currentNewsService: CurrentNewsService) {}
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
     this.currentNewsService.start();
-    this.changeDetector.detectChanges();
   }
 
   ngOnDestroy(): void {
     this.currentNewsService.stop();
+    this.currentNewsService.finish();
   }
 
   openNewTab(news: News, event: Event): void {
