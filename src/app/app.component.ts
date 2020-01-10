@@ -9,7 +9,11 @@ import { CurrentNewsService } from './current-news.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  constructor(private currentNewsService: CurrentNewsService) {}
+  view$: rx.Observable<CurrentNewsState>;
+
+  constructor(private currentNewsService: CurrentNewsService) {
+    this.view$ = this.currentNewsService.output$;
+  }
 
   ngOnInit(): void {
     this.currentNewsService.start();
@@ -18,6 +22,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.currentNewsService.stop();
     this.currentNewsService.finish();
+  }
+
+  fetch(): void {
+    this.currentNewsService.fetchLatestNews();
   }
 
 }

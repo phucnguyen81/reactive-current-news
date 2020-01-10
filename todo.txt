@@ -1,9 +1,3 @@
-# Subscribe to state$ on start (in current-news.control)
--   Then we can remove the change detection in AfterViewInit
-
-# Move the toolbar out of current-news component
-The toolbar is shared between all tabs/components.
-
 # Add Settings component
 
 # Add Settings tab for Settings component

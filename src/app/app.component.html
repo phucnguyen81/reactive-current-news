@@ -1,1 +1,18 @@
+<ng-container *ngIf="view$ | async as view">
+  <ng-container *ngIf="view.latestNews as latestNews">
+    <mat-toolbar class="fixed-header" color="primary">
+      <button mat-button>{{view.title}}</button>
+      <button mat-button (click)="fetch()">Fetch</button>
+      <span class="example-fill-remaining-space"></span>
+      <button mat-button>
+        Today remaining requests: {{latestNews.rateLimitRemaining}}
+      </button>
+    </mat-toolbar>
+    <!-- Add an empty toolbar to create offset with the same height -->
+    <mat-toolbar></mat-toolbar>
+    <div *ngIf="view.latestNewsError">
+      Error: {{view.latestNewsError}}
+    </div>
+  </ng-container>
+</ng-container>
 <router-outlet></router-outlet>
