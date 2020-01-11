@@ -42,8 +42,13 @@ export class CurrentsApiControl {
     );
 
   private readonly latestNewsComplete$: rx.Observable<events.AppEvent> =
-    this.currentsapi.latestNewsCompleteOut$.pipe(
-      ops.mapTo(new events.CompleteFetchingLatestNews())
+    rx.merge(
+      this.currentsapi.latestNewsCompleteOut$.pipe(
+        ops.mapTo(new events.CompleteFetchingLatestNews())
+      ),
+      this.currentsapi.latestNewsErrorOut$.pipe(
+        ops.map(err => new events.CompleteFetchingLatestNews())
+      ),
     );
 
   readonly output$: rx.Observable<events.AppEvent> = rx.merge(

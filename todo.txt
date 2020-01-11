@@ -14,6 +14,8 @@
 
 # Learn xstate using this repo for awhile
 
+# From Settings, go back to previous route after Save
+
 # Create use cases
 
 # Describe the app dataflow

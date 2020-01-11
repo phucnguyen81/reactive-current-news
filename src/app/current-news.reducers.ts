@@ -33,6 +33,7 @@ function On_nextState(
       return {
         ...state,
         fetchingLatestNews: true,
+        latestNewsError: '',
       };
     }
   }
