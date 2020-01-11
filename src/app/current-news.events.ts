@@ -27,3 +27,8 @@ export class LatestNewsError extends AppEvent {
   }
 }
 
+export class ApiKey extends AppEvent {
+  constructor(public apiKey: string) {
+    super();
+  }
+}

@@ -4,7 +4,10 @@ import { CurrentNewsState, On, Off } from './current-news.state';
 export function nextState(
   state: CurrentNewsState, event: events.AppEvent
 ): CurrentNewsState {
-  if (state.state instanceof On) {
+  if (event instanceof events.Skip) {
+    return state;
+  }
+  else if (state.state instanceof On) {
     return On_nextState(state, event);
   }
   else if (state.state instanceof Off) {
@@ -26,7 +29,6 @@ function On_nextState(
     };
   }
   else if ((event instanceof events.FetchLatestNews)) {
-    // do fetching only one at a time
     if (!state.fetchingLatestNews) {
       return {
         ...state,
@@ -57,6 +59,12 @@ function On_nextState(
       ...state,
       latestNewsError: event.message,
     };
+  }
+  else if (event instanceof events.ApiKey) {
+    return {
+      ...state,
+      apiKey: event.apiKey,
+    }
   }
 
   return state;

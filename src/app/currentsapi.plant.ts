@@ -29,9 +29,8 @@ export class CurrentsApiPlant {
 
   constructor(private httpClient: HttpClient) {}
 
-  fetchLatestNews(): void {
+  fetchLatestNews(apiKey: string): void {
     const url = '/current-news/v1/latest-news';
-    const apiKey ='dwZHTHEaDbirvOnTb3qm6yNyJbweQY3OebePf2RZV8O7iiz-';
     const headers = new HttpHeaders().set('Authorization', apiKey);
     const params = new HttpParams().set('language', 'en');
 

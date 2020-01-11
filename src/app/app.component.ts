@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from "@angular/router";
 
 import * as rx from 'rxjs';
 
@@ -15,10 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   view$: rx.Observable<CurrentNewsState>;
 
-  constructor(
-    private currentNewsService: CurrentNewsService,
-    private router: Router,
-  ) {
+  constructor(private currentNewsService: CurrentNewsService) {
     this.view$ = this.currentNewsService.output$;
   }
 
@@ -35,19 +31,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.currentNewsService.fetchLatestNews();
   }
 
-  home(): void {
-    this.router.navigate(['']);
+  goHome(): void {
+    this.currentNewsService.navigateHome();
   }
 
-  settings(): void {
-    this.router.navigate(['settings']).then(sucess => {
-      if (sucess) {
-        console.log('done');
-      }
-      else {
-        console.log('failed');
-      }
-    });
+  goSettings(): void {
+    this.currentNewsService.navigateSettings();
   }
 
 }

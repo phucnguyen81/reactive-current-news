@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router";
 
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
@@ -15,7 +16,10 @@ export class CurrentNewsService {
 
   readonly output$ = this.control.output$;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+  ) {}
 
   start(): void {
     this.control.start();
@@ -38,6 +42,22 @@ export class CurrentNewsService {
 
   openNewTab(url: string): void {
     this.control.openNewTab(url);
+  }
+
+  navigateHome(): void {
+    this.router.navigate(['']);
+  }
+
+  navigateSettings(): void {
+    this.router.navigate(['settings']);
+  }
+
+  changeApiKey(apiKey: string): void {
+    this.control.changeApiKey(apiKey);
+  }
+
+  saveApiKey(): void {
+    this.control.saveApiKey();
   }
 
 }

@@ -1,8 +1,16 @@
-# Add Settings component
+# Add apiKey for Settings component
 
-# Add Settings tab for Settings component
-
-# Add apiKey for Settings
+- Let state contain the apiKey
+- If no apiKey, show error
+- Add Apply button to the toolbar
+- Add api key to current-news.state
+- When Apply is clicked, send api-key-settings event
+- On app.component loading, local-storage sends api-key-storage event
+- On api-key-settings, update key in current-news.state
+- On api-key-settings, save the api key to local storage
+- On api-key-storage, set key if key is missing
+- On fetching, if the key is missing, set error
+- On fetching, if the key is missing, fetching is cancelled
 
 # Learn xstate using this repo for awhile
 
@@ -49,3 +57,5 @@ new/available news cards
 
 # Switch themes
 https://material.angular.io/guide/theming
+
+# Flash the 'Today remaining requests' if it changes

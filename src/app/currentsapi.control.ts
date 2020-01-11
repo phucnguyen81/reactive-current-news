@@ -20,8 +20,8 @@ export class CurrentsApiControl {
         }
       ),
       ops.tap(state => {
-        if (state.fetchingLatestNews) {
-          this.currentsapi.fetchLatestNews();
+        if (state.fetchingLatestNews && state.apiKey) {
+          this.currentsapi.fetchLatestNews(state.apiKey);
         }
         else {
           this.currentsapi.cancelLatestNews();
@@ -50,7 +50,7 @@ export class CurrentsApiControl {
     this.fetchLatestNews$,
     this.receiveLatestNews$,
     this.latestNewsError$,
-    this.latestNewsComplete$
+    this.latestNewsComplete$,
   );
 
   constructor(
