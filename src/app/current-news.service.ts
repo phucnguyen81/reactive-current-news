@@ -5,26 +5,32 @@ import { Router } from "@angular/router";
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
+import * as events from './current-news.events';
 import { CurrentNewsControl } from './current-news.control';
+import { CurrentNewsState } from './current-news.state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentNewsService {
 
-  private readonly control = new CurrentNewsControl(this.httpClient);
+  private readonly control: CurrentNewsControl;
 
-  readonly input$ = this.control.input$;
+  readonly input$: rx.Subject<events.AppEvent>;
 
-  readonly output$ = this.control.output$;
+  readonly output$: rx.Observable<CurrentNewsState>;
 
-  readonly finish$: rx.Observable<any> =
-    this.control.finish$.asObservable();
+  readonly finish$: rx.Observable<any>;
 
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-  ) {}
+  ) {
+    this.control = new CurrentNewsControl(this.httpClient);
+    this.input$ = this.control.input$;
+    this.output$ = this.control.output$;
+    this.finish$ = this.control.finished();
+  }
 
   start(): void {
     this.control.start();
