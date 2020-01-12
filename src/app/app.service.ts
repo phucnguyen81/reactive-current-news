@@ -64,7 +64,7 @@ export class AppService {
   }
 
   openNewTab(url: string): void {
-    this.currentNewsConnector.openNewTab(url);
+    window.open(url, '_blank');
   }
 
   changeApiKey(apiKey: string): void {

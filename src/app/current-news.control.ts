@@ -54,8 +54,4 @@ export class CurrentNewsControl {
     this.input$.next(new events.CancelFetchingLatestNews());
   }
 
-  openNewTab(url: string): void {
-    window.open(url, '_blank');
-  }
-
 }

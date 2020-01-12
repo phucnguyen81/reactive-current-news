@@ -42,8 +42,4 @@ export class CurrentNewsConnector {
     this.control.fetchLatestNews();
   }
 
-  openNewTab(url: string): void {
-    this.control.openNewTab(url);
-  }
-
 }
