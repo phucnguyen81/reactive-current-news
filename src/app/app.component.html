@@ -2,13 +2,13 @@
   <ng-container *ngIf="view.latestNews as latestNews">
     <mat-toolbar class="fixed-header" color="primary">
       <mat-toolbar-row>
-        <button mat-button (click)="goHome()">{{view.title}}</button>
+        <button mat-button (click)="goToHome()">{{view.title}}</button>
         <button mat-button (click)="fetch()">Fetch</button>
         <span class="example-fill-remaining-space"></span>
         <button mat-button>
           Today remaining requests: {{latestNews.rateLimitRemaining}}
         </button>
-        <button mat-button (click)="goSettings()">
+        <button mat-button (click)="goToSettings()">
           <mat-icon aria-hidden="false" aria-label="Application Settings">
             settings_applications
           </mat-icon>

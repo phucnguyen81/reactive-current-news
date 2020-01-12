@@ -7,6 +7,7 @@ import * as ops from 'rxjs/operators';
 import { CurrentNewsService } from './current-news.service';
 import { CurrentNewsState } from './current-news.state';
 import { ErrorMessagesService } from './error-messages.service';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -15,40 +16,32 @@ import { ErrorMessagesService } from './error-messages.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  view$: rx.Observable<CurrentNewsState>;
+  readonly view$: rx.Observable<CurrentNewsState>;
 
   constructor(
-    private currentNewsService: CurrentNewsService,
-    private errorMessagesService: ErrorMessagesService,
-    private snackBar: MatSnackBar,
+    private appService: AppService,
   ) {
-    this.view$ = this.currentNewsService.output$;
+    this.view$ = this.appService.view$;
   }
 
   ngOnInit(): void {
-    this.errorMessagesService.attach(
-      this.currentNewsService,
-      this.snackBar,
-    );
-    this.currentNewsService.start();
+    this.appService.attach();
   }
 
   ngOnDestroy(): void {
-    this.currentNewsService.stop();
-    this.currentNewsService.finish();
-    this.errorMessagesService.detach();
+    this.appService.detach();
   }
 
   fetch(): void {
-    this.currentNewsService.fetchLatestNews();
+    this.appService.fetch();
   }
 
-  goHome(): void {
-    this.currentNewsService.navigateHome();
+  goToHome(): void {
+    this.appService.goToHome();
   }
 
-  goSettings(): void {
-    this.currentNewsService.navigateSettings();
+  goToSettings(): void {
+    this.appService.goToSettings();
   }
 
 }
