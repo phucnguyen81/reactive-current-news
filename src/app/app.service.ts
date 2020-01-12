@@ -11,6 +11,7 @@ import { CurrentNewsState } from './current-news.state';
 
 import { CurrentNewsConnector } from './current-news.connector';
 import { ErrorMessagesConnector } from './error-messages.connector';
+import { MissingApiKeyConnector } from './missing-api-key.connector';
 import { CurrentsApiConnector } from './currentsapi.connector';
 import { SettingsConnector } from './settings.connector';
 
@@ -46,11 +47,13 @@ export class AppService {
     const currentNews = this.currentNews;
     const currentsapi = new CurrentsApiConnector(this.httpClient);
     const errorMessages = new ErrorMessagesConnector(this.snackBar);
+    const missingApiKey = new MissingApiKeyConnector(this.snackBar);
     const settings = this.settings;
 
     currentNews.connect(this);
     currentsapi.connect(this);
     errorMessages.connect(this);
+    missingApiKey.connect(this);
     settings.connect(this);
 
     this.currentNews.start();

@@ -6,22 +6,22 @@ import * as ops from 'rxjs/operators';
 
 import { AppService } from './app.service';
 import { CurrentNewsState } from './current-news.state';
-import { ErrorMessagesControl } from './error-messages.control';
+import { MissingApiKeyControl } from './missing-api-key.control';
 
-export class ErrorMessagesConnector {
+export class MissingApiKeyConnector {
 
   constructor(private snackBar: MatSnackBar) {}
 
   connect(appService: AppService): void {
-    const latestNewsError$ = appService.output$.pipe(
-      ops.map<CurrentNewsState, string>(
-        state => state.latestNewsError
-      )
+    const missingApiKey$ = appService.output$.pipe(
+      ops.map<CurrentNewsState, string>(state => {
+        return (state.apiKey ? '' : 'Missing API Key');
+      })
     );
 
-    const errorMessages = new ErrorMessagesControl(
+    const errorMessages = new MissingApiKeyControl(
       this.snackBar,
-      latestNewsError$,
+      missingApiKey$,
     );
 
     errorMessages.output$.pipe(
