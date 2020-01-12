@@ -8,7 +8,7 @@ import * as ops from 'rxjs/operators';
 import { CurrentNewsService } from './current-news.service';
 import { CurrentNewsState } from './current-news.state';
 import { ErrorMessagesService } from './error-messages.service';
-import { CurrentsApiService } from './currentsapi.service';
+import { CurrentsApiConnector } from './currentsapi.connector';
 
 
 @Injectable({
@@ -28,9 +28,9 @@ export class AppService {
   }
 
   attach(): void {
-    new CurrentsApiService(this.httpClient).attach(
-      this.currentNewsService
-    );
+    const currentsapi = new CurrentsApiConnector(this.httpClient);
+
+    currentsapi.connect(this.currentNewsService);
     this.errorMessagesService.attach(
       this.currentNewsService,
       this.snackBar,

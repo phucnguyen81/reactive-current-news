@@ -38,7 +38,6 @@ export class CurrentNewsService {
   }
 
   stop(): void {
-    // TODO stop() should already do the cancel
     this.control.cancelFetchingLatestNews();
     this.control.stop();
   }
