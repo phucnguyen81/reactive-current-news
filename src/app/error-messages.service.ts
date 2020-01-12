@@ -6,37 +6,35 @@ import * as ops from 'rxjs/operators';
 
 import { CurrentNewsService } from './current-news.service';
 import { CurrentNewsState } from './current-news.state';
+import { ErrorMessagesControl } from './error-messages.control';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorMessagesService {
 
-  private readonly cancel$ = new rx.Subject<any>();
+  private readonly unsubscribe$ = new rx.Subject<any>();
 
   attach(
-    context: CurrentNewsService,
+    currentNews: CurrentNewsService,
     snackBar: MatSnackBar,
   ): void {
-    context.output$.pipe(
-      ops.distinctUntilChanged(
-        (s1: CurrentNewsState, s2: CurrentNewsState) => {
-          return (s1.latestNewsError === s2.latestNewsError);
-        }
+    const errorMessages = new ErrorMessagesControl(
+      snackBar,
+      currentNews.output$.pipe(
+        ops.map<CurrentNewsState, string>(
+          state => state.latestNewsError
+        )
       ),
-      ops.map(state => state.latestNewsError),
-      ops.filter(state => !!state),
-      ops.tap(error => {
-        snackBar.open(error, 'Dismiss', {
-          duration: 4000,
-        });
-      }),
-      ops.takeUntil(this.cancel$),
+    );
+
+    errorMessages.output$.pipe(
+      ops.takeUntil(this.unsubscribe$)
     ).subscribe();
   }
 
   detach(): void {
-    this.cancel$.next(true);
+    this.unsubscribe$.next(true);
   }
 
 }

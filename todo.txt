@@ -1,9 +1,15 @@
+# Create settings.service
+
 # Organize service layer
 Services are like those black-box processes in flow-based programming.
 They are created then configured externally to form a network of processes.
 
 - There is a root service that configures other services
 - To configure the root service, attach services together (with subscribe())
+
+# Rename current-news to latest-news
+
+# Rename app.service to current-news.service
 
 # Add apiKey for Settings component
 
