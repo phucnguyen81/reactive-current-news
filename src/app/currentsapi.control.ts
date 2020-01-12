@@ -27,7 +27,7 @@ export class CurrentsApiControl {
           this.currentsapi.cancelLatestNews();
         }
       }),
-      ops.mapTo(new events.Skip()),
+      ops.skipWhile(() => true),
     );
 
   private readonly receiveLatestNews$: rx.Observable<events.AppEvent> =

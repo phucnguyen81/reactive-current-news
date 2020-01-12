@@ -4,10 +4,7 @@ import { CurrentNewsState, On, Off } from './current-news.state';
 export function nextState(
   state: CurrentNewsState, event: events.AppEvent
 ): CurrentNewsState {
-  if (event instanceof events.Skip) {
-    return state;
-  }
-  else if (state.state instanceof On) {
+  if (state.state instanceof On) {
     return On_nextState(state, event);
   }
   else if (state.state instanceof Off) {
