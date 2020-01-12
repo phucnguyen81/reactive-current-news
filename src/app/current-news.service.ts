@@ -54,12 +54,4 @@ export class CurrentNewsService {
     this.control.openNewTab(url);
   }
 
-  navigateHome(): void {
-    this.router.navigate(['']);
-  }
-
-  navigateSettings(): void {
-    this.router.navigate(['settings']);
-  }
-
 }

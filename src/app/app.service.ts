@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router";
 
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
@@ -25,6 +26,7 @@ export class AppService {
     private currentNewsService: CurrentNewsService,
     private snackBar: MatSnackBar,
     private httpClient: HttpClient,
+    private router: Router,
   ) {
     this.output$ = this.currentNewsService.output$;
     this.settings = new SettingsConnector();
@@ -52,11 +54,11 @@ export class AppService {
   }
 
   goToHome(): void {
-    this.currentNewsService.navigateHome();
+    this.router.navigate(['']);
   }
 
   goToSettings(): void {
-    this.currentNewsService.navigateSettings();
+    this.router.navigate(['settings']);
   }
 
   openNewTab(url: string): void {
