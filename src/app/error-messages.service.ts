@@ -12,14 +12,12 @@ import { CurrentNewsState } from './current-news.state';
 })
 export class ErrorMessagesService {
 
-  private readonly cancel$: rx.Subject<any>;
+  private readonly cancel$ = new rx.Subject<any>();
 
   attach(
     context: CurrentNewsService,
     snackBar: MatSnackBar,
   ): void {
-    this.cancel$ = new rx.Subject<any>();
-
     context.output$.pipe(
       ops.distinctUntilChanged(
         (s1: CurrentNewsState, s2: CurrentNewsState) => {
