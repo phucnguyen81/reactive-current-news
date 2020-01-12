@@ -12,32 +12,21 @@ import { CurrentsApiControl } from './currentsapi.control';
 import { LatestNewsResponse } from './current-news.adapter';
 
 /**
- * Connect output of currentapi control to app input.
+ * Connect currentsapi to current-news
  */
-@Injectable({
-  providedIn: 'root'
-})
 export class CurrentsApiService {
-
-  private readonly unsubscribe$ = new rx.Subject<any>();
 
   constructor(private httpClient: HttpClient) {}
 
-  attach(
-    currentNews: CurrentNewsService,
-  ) {
+  attach(currentNews: CurrentNewsService) {
     const currentsapi = new CurrentsApiControl(
       currentNews.output$,
       new CurrentsApiPlant(this.httpClient),
     );
 
     currentsapi.output$.pipe(
-      ops.takeUntil(this.unsubscribe$)
+      ops.takeUntil(currentNews.finish$)
     ).subscribe(currentNews.input$);
-  }
-
-  detach(): void {
-    this.unsubscribe$.next(true);
   }
 
 }

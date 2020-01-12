@@ -18,6 +18,9 @@ export class CurrentNewsService {
 
   readonly output$ = this.control.output$;
 
+  readonly finish$: rx.Observable<any> =
+    this.control.finish$.asObservable();
+
   constructor(
     private httpClient: HttpClient,
     private router: Router,

@@ -32,7 +32,7 @@ export class CurrentNewsControl {
 
   readonly input$ = new rx.Subject<events.AppEvent>();
 
-  private readonly finish$ = new rx.Subject<any>();
+  readonly finish$ = new rx.Subject<any>();
 
   private readonly state$: rx.Observable<CurrentNewsState> = rx.merge(
     this.input$,
