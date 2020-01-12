@@ -46,7 +46,7 @@ function On_nextState(
       fetchingLatestNews: false,
     };
   }
-  else if (event instanceof events.CompleteFetchingLatestNews) {
+  else if (event instanceof events.FetchingLatestNewsDone) {
     return {
       ...state,
       fetchingLatestNews: false,

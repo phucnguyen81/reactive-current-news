@@ -16,7 +16,7 @@ export class FetchLatestNews extends AppEvent { }
 
 export class CancelFetchingLatestNews extends AppEvent { }
 
-export class CompleteFetchingLatestNews extends AppEvent { }
+export class FetchingLatestNewsDone extends AppEvent { }
 
 export class LatestNewsError extends AppEvent {
   constructor(public message: string) {
