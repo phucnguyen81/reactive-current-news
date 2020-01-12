@@ -62,12 +62,4 @@ export class CurrentNewsService {
     this.router.navigate(['settings']);
   }
 
-  changeApiKey(apiKey: string): void {
-    this.control.changeApiKey(apiKey);
-  }
-
-  saveApiKey(): void {
-    this.control.saveApiKey();
-  }
-
 }

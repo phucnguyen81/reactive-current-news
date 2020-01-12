@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
-import { CurrentNewsService } from './current-news.service';
+import { AppService } from './app.service';
 import { LatestNews, News } from './current-news.interface';
 import { CurrentNewsState } from './current-news.state';
 
@@ -16,8 +16,8 @@ export class CurrentNewsComponent implements OnInit, OnDestroy {
 
   view$: rx.Observable<CurrentNewsState>;
 
-  constructor(private currentNewsService: CurrentNewsService) {
-    this.view$ = this.currentNewsService.output$;
+  constructor(private appService: AppService) {
+    this.view$ = this.appService.output$;
   }
 
   ngOnInit(): void { }
@@ -26,7 +26,7 @@ export class CurrentNewsComponent implements OnInit, OnDestroy {
 
   openNewTab(news: News, event: Event): void {
     event.preventDefault();
-    this.currentNewsService.openNewTab(news.url);
+    this.appService.openNewTab(news.url);
   }
 
 }

@@ -12,22 +12,11 @@ import { CurrentNewsState } from './current-news.state';
 import * as events from './current-news.events';
 import { nextState } from './current-news.reducers';
 import { CurrentsApiControl } from './currentsapi.control';
-import { SettingsControl } from './settings.control';
 
 export class CurrentNewsControl {
 
   readonly output$ = new rx.BehaviorSubject<CurrentNewsState>(
     new CurrentNewsState()
-  );
-
-  private readonly settingsControl = new SettingsControl();
-
-  private readonly apiKey$ = this.settingsControl.apiKey$.pipe(
-    ops.map(apiKey => new events.ApiKey(apiKey))
-  );
-
-  private readonly feedback$ = rx.merge(
-    this.apiKey$,
   );
 
   readonly input$ = new rx.Subject<events.AppEvent>();
@@ -39,7 +28,6 @@ export class CurrentNewsControl {
 
   private readonly state$: rx.Observable<CurrentNewsState> = rx.merge(
     this.input$,
-    this.feedback$,
   ).pipe(
     ops.scan<events.AppEvent, CurrentNewsState>(
       nextState, new CurrentNewsState()
@@ -73,14 +61,6 @@ export class CurrentNewsControl {
 
   openNewTab(url: string): void {
     window.open(url, '_blank');
-  }
-
-  changeApiKey(apiKey: string): void {
-    this.settingsControl.changeApiKey(apiKey);
-  }
-
-  saveApiKey(): void {
-    this.settingsControl.saveApiKey();
   }
 
 }

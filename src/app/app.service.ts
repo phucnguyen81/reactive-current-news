@@ -9,6 +9,7 @@ import { CurrentNewsService } from './current-news.service';
 import { CurrentNewsState } from './current-news.state';
 import { ErrorMessagesConnector } from './error-messages.connector';
 import { CurrentsApiConnector } from './currentsapi.connector';
+import { SettingsConnector } from './settings.connector';
 
 
 @Injectable({
@@ -17,6 +18,8 @@ import { CurrentsApiConnector } from './currentsapi.connector';
 export class AppService {
 
   readonly output$: rx.Observable<CurrentNewsState>;
+
+  private readonly settings = new SettingsConnector();
 
   constructor(
     private currentNewsService: CurrentNewsService,
@@ -29,9 +32,12 @@ export class AppService {
   attach(): void {
     const currentsapi = new CurrentsApiConnector(this.httpClient);
     const errorMessages = new ErrorMessagesConnector(this.snackBar);
+    const settings = this.settings;
 
     currentsapi.connect(this.currentNewsService);
     errorMessages.connect(this.currentNewsService);
+    settings.connect(this.currentNewsService);
+
     this.currentNewsService.start();
   }
 
@@ -50,6 +56,18 @@ export class AppService {
 
   goToSettings(): void {
     this.currentNewsService.navigateSettings();
+  }
+
+  openNewTab(url: string): void {
+    this.currentNewsService.openNewTab(url);
+  }
+
+  changeApiKey(apiKey: string): void {
+    this.settings.changeApiKey(apiKey);
+  }
+
+  saveApiKey(): void {
+    this.settings.saveApiKey();
   }
 
 }
