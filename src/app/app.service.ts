@@ -7,8 +7,9 @@ import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
 import * as events from './current-news.events';
-import { CurrentNewsConnector } from './current-news.connector';
 import { CurrentNewsState } from './current-news.state';
+
+import { CurrentNewsConnector } from './current-news.connector';
 import { ErrorMessagesConnector } from './error-messages.connector';
 import { CurrentsApiConnector } from './currentsapi.connector';
 import { SettingsConnector } from './settings.connector';
