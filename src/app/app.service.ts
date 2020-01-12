@@ -7,7 +7,7 @@ import * as ops from 'rxjs/operators';
 
 import { CurrentNewsService } from './current-news.service';
 import { CurrentNewsState } from './current-news.state';
-import { ErrorMessagesService } from './error-messages.service';
+import { ErrorMessagesConnector } from './error-messages.connector';
 import { CurrentsApiConnector } from './currentsapi.connector';
 
 
@@ -28,7 +28,7 @@ export class AppService {
 
   attach(): void {
     const currentsapi = new CurrentsApiConnector(this.httpClient);
-    const errorMessages = new ErrorMessagesService(this.snackBar);
+    const errorMessages = new ErrorMessagesConnector(this.snackBar);
 
     currentsapi.connect(this.currentNewsService);
     errorMessages.connect(this.currentNewsService);

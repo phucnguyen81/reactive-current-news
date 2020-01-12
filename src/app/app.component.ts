@@ -1,12 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
-import { CurrentNewsService } from './current-news.service';
 import { CurrentNewsState } from './current-news.state';
-import { ErrorMessagesService } from './error-messages.service';
 import { AppService } from './app.service';
 
 @Component({

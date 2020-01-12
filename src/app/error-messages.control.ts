@@ -13,8 +13,8 @@ export class ErrorMessagesControl {
     private message$: rx.Observable<string>,
   ) {
     this.output$ = message$.pipe(
-      ops.filter(message => !!message),
       ops.distinctUntilChanged(),
+      ops.filter(message => !!message),
       ops.tap(message => this.openSnackBar(message)),
     );
   }

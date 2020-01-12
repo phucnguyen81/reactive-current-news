@@ -8,7 +8,7 @@ import { CurrentNewsService } from './current-news.service';
 import { CurrentNewsState } from './current-news.state';
 import { ErrorMessagesControl } from './error-messages.control';
 
-export class ErrorMessagesService {
+export class ErrorMessagesConnector {
 
   constructor(private snackBar: MatSnackBar) {}
 
