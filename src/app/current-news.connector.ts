@@ -27,13 +27,11 @@ export class CurrentNewsConnector {
   }
 
   start(): void {
-    this.control.start();
     this.control.fetchLatestNews();
   }
 
   stop(): void {
     this.control.cancelFetchingLatestNews();
-    this.control.stop();
   }
 
   fetchLatestNews(): void {

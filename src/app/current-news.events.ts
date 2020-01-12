@@ -2,10 +2,6 @@ import { LatestNews } from './current-news.interface';
 
 export class AppEvent { }
 
-export class Start extends AppEvent { }
-
-export class Stop extends AppEvent { }
-
 export class ReceiveLatestNews extends AppEvent {
   constructor(public latestNews: LatestNews) {
     super();

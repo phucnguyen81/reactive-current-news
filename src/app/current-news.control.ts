@@ -17,14 +17,6 @@ export class CurrentNewsControl {
     )
   );
 
-  start(): void {
-    this.input$.next(new events.Start());
-  }
-
-  stop(): void {
-    this.input$.next(new events.Stop());
-  }
-
   fetchLatestNews(): void {
     this.input$.next(new events.FetchLatestNews());
   }
