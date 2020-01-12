@@ -14,7 +14,7 @@ export class CurrentsApiConnector {
 
   constructor(private httpClient: HttpClient) {}
 
-  connect(currentNews: CurrentNewsService) {
+  connect(currentNews: CurrentNewsService): void {
     const currentsapi = new CurrentsApiControl(
       currentNews.output$,
       new CurrentsApiPlant(this.httpClient),

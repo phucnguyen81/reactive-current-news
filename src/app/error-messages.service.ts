@@ -8,19 +8,13 @@ import { CurrentNewsService } from './current-news.service';
 import { CurrentNewsState } from './current-news.state';
 import { ErrorMessagesControl } from './error-messages.control';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class ErrorMessagesService {
 
-  private readonly unsubscribe$ = new rx.Subject<any>();
+  constructor(private snackBar: MatSnackBar) {}
 
-  attach(
-    currentNews: CurrentNewsService,
-    snackBar: MatSnackBar,
-  ): void {
+  connect(currentNews: CurrentNewsService): void {
     const errorMessages = new ErrorMessagesControl(
-      snackBar,
+      this.snackBar,
       currentNews.output$.pipe(
         ops.map<CurrentNewsState, string>(
           state => state.latestNewsError
@@ -29,12 +23,8 @@ export class ErrorMessagesService {
     );
 
     errorMessages.output$.pipe(
-      ops.takeUntil(this.unsubscribe$)
+      ops.takeUntil(currentNews.finish$)
     ).subscribe();
-  }
-
-  detach(): void {
-    this.unsubscribe$.next(true);
   }
 
 }

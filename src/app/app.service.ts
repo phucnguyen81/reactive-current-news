@@ -20,7 +20,6 @@ export class AppService {
 
   constructor(
     private currentNewsService: CurrentNewsService,
-    private errorMessagesService: ErrorMessagesService,
     private snackBar: MatSnackBar,
     private httpClient: HttpClient,
   ) {
@@ -29,19 +28,16 @@ export class AppService {
 
   attach(): void {
     const currentsapi = new CurrentsApiConnector(this.httpClient);
+    const errorMessages = new ErrorMessagesService(this.snackBar);
 
     currentsapi.connect(this.currentNewsService);
-    this.errorMessagesService.attach(
-      this.currentNewsService,
-      this.snackBar,
-    );
+    errorMessages.connect(this.currentNewsService);
     this.currentNewsService.start();
   }
 
   detach(): void {
     this.currentNewsService.stop();
     this.currentNewsService.finish();
-    this.errorMessagesService.detach();
   }
 
   fetch(): void {
