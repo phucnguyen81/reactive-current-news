@@ -15,7 +15,13 @@ export class MissingApiKeyConnector {
   connect(appService: AppService): void {
     const missingApiKey$ = appService.output$.pipe(
       ops.map<CurrentNewsState, string>(state => {
-        return (state.apiKey ? '' : 'Missing API Key');
+        if (state.apiKey) {
+          return '';
+        }
+        if (state.fetchingLatestNews) {
+          return 'Fetching requires API Key';
+        }
+        return 'Missing API Key';
       })
     );
 
