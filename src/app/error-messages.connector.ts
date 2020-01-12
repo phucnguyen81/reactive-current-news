@@ -13,12 +13,23 @@ export class ErrorMessagesConnector {
   constructor(private snackBar: MatSnackBar) {}
 
   connect(appService: AppService): void {
+    const latestNewsError$ = appService.output$.pipe(
+      ops.map<CurrentNewsState, string>(
+        state => state.latestNewsError
+      )
+    );
+
+    const missingApiKey$ = appService.output$.pipe(
+      ops.map(state => {
+        return (state.apiKey ? '' : 'Missing API Key');
+      })
+    );
+
     const errorMessages = new ErrorMessagesControl(
       this.snackBar,
-      appService.output$.pipe(
-        ops.map<CurrentNewsState, string>(
-          state => state.latestNewsError
-        )
+      rx.merge(
+        latestNewsError$,
+        missingApiKey$,
       ),
     );
 
