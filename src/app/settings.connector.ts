@@ -3,18 +3,18 @@ import * as ops from 'rxjs/operators';
 
 import * as events from './current-news.events';
 import { SettingsControl } from './settings.control';
-import { CurrentNewsConnector } from './current-news.connector';
+import { AppService } from './app.service';
 
 
 export class SettingsConnector {
 
   private readonly settings = new SettingsControl();
 
-  connect(currentNews: CurrentNewsConnector): void {
+  connect(appService: AppService): void {
     this.settings.apiKey$.pipe(
       ops.map(apiKey => new events.ApiKey(apiKey)),
-      ops.takeUntil(currentNews.finish$),
-    ).subscribe(currentNews.input$)
+      ops.takeUntil(appService.finish$),
+    ).subscribe(appService.input$)
   }
 
   changeApiKey(apiKey: string): void {

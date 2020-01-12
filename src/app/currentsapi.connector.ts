@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
-import { CurrentNewsConnector } from './current-news.connector';
+import { AppService } from './app.service';
 import { CurrentsApiPlant } from './currentsapi.plant';
 import { CurrentsApiControl } from './currentsapi.control';
 
@@ -14,15 +14,15 @@ export class CurrentsApiConnector {
 
   constructor(private httpClient: HttpClient) {}
 
-  connect(currentNews: CurrentNewsConnector): void {
+  connect(appService: AppService): void {
     const currentsapi = new CurrentsApiControl(
-      currentNews.output$,
+      appService.output$,
       new CurrentsApiPlant(this.httpClient),
     );
 
     currentsapi.output$.pipe(
-      ops.takeUntil(currentNews.finish$)
-    ).subscribe(currentNews.input$);
+      ops.takeUntil(appService.finish$)
+    ).subscribe(appService.input$);
   }
 
 }

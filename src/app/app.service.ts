@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
+import * as events from './current-news.events';
 import { CurrentNewsConnector } from './current-news.connector';
 import { CurrentNewsState } from './current-news.state';
 import { ErrorMessagesConnector } from './error-messages.connector';
@@ -18,9 +19,15 @@ import { SettingsConnector } from './settings.connector';
 })
 export class AppService {
 
-  readonly output$: rx.Observable<CurrentNewsState>;
+  readonly input$: rx.Subject<events.AppEvent>;
 
-  private readonly currentNewsConnector: CurrentNewsConnector;
+  readonly output$ = new rx.BehaviorSubject<CurrentNewsState>(
+    new CurrentNewsState()
+  );
+
+  readonly finish$ = new rx.Subject<any>();
+
+  private readonly currentNews: CurrentNewsConnector;
 
   private readonly settings: SettingsConnector;
 
@@ -29,30 +36,32 @@ export class AppService {
     private httpClient: HttpClient,
     private router: Router,
   ) {
-    this.currentNewsConnector = new CurrentNewsConnector(httpClient);
-    this.output$ = this.currentNewsConnector.output$;
+    this.currentNews = new CurrentNewsConnector();
+    this.input$ = this.currentNews.input$
     this.settings = new SettingsConnector();
   }
 
   start(): void {
+    const currentNews = this.currentNews;
     const currentsapi = new CurrentsApiConnector(this.httpClient);
     const errorMessages = new ErrorMessagesConnector(this.snackBar);
     const settings = this.settings;
 
-    currentsapi.connect(this.currentNewsConnector);
-    errorMessages.connect(this.currentNewsConnector);
-    settings.connect(this.currentNewsConnector);
+    currentNews.connect(this);
+    currentsapi.connect(this);
+    errorMessages.connect(this);
+    settings.connect(this);
 
-    this.currentNewsConnector.start();
+    this.currentNews.start();
   }
 
   stop(): void {
-    this.currentNewsConnector.stop();
-    this.currentNewsConnector.finish();
+    this.currentNews.stop();
+    this.finish$.next(true);
   }
 
   fetch(): void {
-    this.currentNewsConnector.fetchLatestNews();
+    this.currentNews.fetchLatestNews();
   }
 
   goToHome(): void {
