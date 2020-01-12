@@ -8,6 +8,7 @@ import * as ops from 'rxjs/operators';
 import { CurrentNewsService } from './current-news.service';
 import { CurrentNewsState } from './current-news.state';
 import { ErrorMessagesService } from './error-messages.service';
+import { CurrentsApiService } from './currentsapi.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,16 @@ export class AppService {
   constructor(
     private currentNewsService: CurrentNewsService,
     private errorMessagesService: ErrorMessagesService,
+    private currentsApiService: CurrentsApiService,
     private snackBar: MatSnackBar,
   ) {
     this.view$ = this.currentNewsService.output$;
   }
 
   attach(): void {
+    this.currentsApiService.attach(
+      this.currentNewsService
+    );
     this.errorMessagesService.attach(
       this.currentNewsService,
       this.snackBar,
@@ -36,6 +41,7 @@ export class AppService {
     this.currentNewsService.stop();
     this.currentNewsService.finish();
     this.errorMessagesService.detach();
+    this.currentsApiService.detach();
   }
 
   fetch(): void {

@@ -20,11 +20,6 @@ export class CurrentNewsControl {
     new CurrentNewsState()
   );
 
-  private readonly currentsapi$ = new CurrentsApiControl(
-    this.output$,
-    new CurrentsApiPlant(this.httpClient)
-  );
-
   private readonly settingsControl = new SettingsControl();
 
   private readonly apiKey$ = this.settingsControl.apiKey$.pipe(
@@ -32,11 +27,10 @@ export class CurrentNewsControl {
   );
 
   private readonly feedback$ = rx.merge(
-    this.currentsapi$.output$,
     this.apiKey$,
   );
 
-  private readonly input$ = new rx.Subject<events.AppEvent>();
+  readonly input$ = new rx.Subject<events.AppEvent>();
 
   private readonly finish$ = new rx.Subject<any>();
 

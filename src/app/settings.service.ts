@@ -14,7 +14,7 @@ export class SettingsService {
   private readonly control = new SettingsControl();
   private readonly cancel$ = new rx.Subject<any>();
 
-  attach(apiKey: rx.Observable<string>): void {
+  attach(apiKey: rx.Subject<string>): void {
     this.control.apiKey$.pipe(
       ops.takeUntil(this.cancel$)
     ).subscribe(apiKey);

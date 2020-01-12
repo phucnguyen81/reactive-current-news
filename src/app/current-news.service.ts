@@ -14,6 +14,8 @@ export class CurrentNewsService {
 
   private readonly control = new CurrentNewsControl(this.httpClient);
 
+  readonly input$ = this.control.input$;
+
   readonly output$ = this.control.output$;
 
   constructor(
