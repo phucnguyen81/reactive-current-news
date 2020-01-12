@@ -22,11 +22,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.appService.attach();
+    this.appService.start();
   }
 
   ngOnDestroy(): void {
-    this.appService.detach();
+    this.appService.stop();
   }
 
   fetch(): void {

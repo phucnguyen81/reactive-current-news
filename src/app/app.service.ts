@@ -19,7 +19,7 @@ export class AppService {
 
   readonly output$: rx.Observable<CurrentNewsState>;
 
-  private readonly settings = new SettingsConnector();
+  private readonly settings: SettingsConnector;
 
   constructor(
     private currentNewsService: CurrentNewsService,
@@ -27,9 +27,10 @@ export class AppService {
     private httpClient: HttpClient,
   ) {
     this.output$ = this.currentNewsService.output$;
+    this.settings = new SettingsConnector();
   }
 
-  attach(): void {
+  start(): void {
     const currentsapi = new CurrentsApiConnector(this.httpClient);
     const errorMessages = new ErrorMessagesConnector(this.snackBar);
     const settings = this.settings;
@@ -41,7 +42,7 @@ export class AppService {
     this.currentNewsService.start();
   }
 
-  detach(): void {
+  stop(): void {
     this.currentNewsService.stop();
     this.currentNewsService.finish();
   }

@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient, HttpParams, HttpErrorResponse, HttpResponse, HttpHeaders
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
-import { LatestNewsResponse } from './current-news.adapter';
-import { CurrentsApiPlant } from './currentsapi.plant';
-import { CurrentNewsState } from './current-news.state';
 import * as events from './current-news.events';
+import { CurrentNewsState } from './current-news.state';
 import { nextState } from './current-news.reducers';
-import { CurrentsApiControl } from './currentsapi.control';
 
 export class CurrentNewsControl {
 
