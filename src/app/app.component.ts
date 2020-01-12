@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
@@ -19,18 +20,23 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private currentNewsService: CurrentNewsService,
     private errorMessagesService: ErrorMessagesService,
+    private snackBar: MatSnackBar,
   ) {
     this.view$ = this.currentNewsService.output$;
   }
 
   ngOnInit(): void {
+    this.errorMessagesService.attach(
+      this.currentNewsService,
+      this.snackBar,
+    );
     this.currentNewsService.start();
   }
 
   ngOnDestroy(): void {
-    this.errorMessagesService.detach();
     this.currentNewsService.stop();
     this.currentNewsService.finish();
+    this.errorMessagesService.detach();
   }
 
   fetch(): void {

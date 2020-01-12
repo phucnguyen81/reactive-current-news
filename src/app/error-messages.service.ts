@@ -14,10 +14,10 @@ export class ErrorMessagesService {
 
   private readonly cancel$: rx.Subject<any>;
 
-  constructor(
-    private context: CurrentNewsService,
-    private snackBar: MatSnackBar,
-  ) {
+  attach(
+    context: CurrentNewsService,
+    snackBar: MatSnackBar,
+  ): void {
     this.cancel$ = new rx.Subject<any>();
 
     context.output$.pipe(
@@ -39,7 +39,6 @@ export class ErrorMessagesService {
 
   detach(): void {
     this.cancel$.next(true);
-    this.cancel$.complete();
   }
 
 }
