@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import * as rx from 'rxjs';
+import * as ops from 'rxjs/operators';
 
 import { CurrentNewsService } from './current-news.service';
 import { CurrentNewsState } from './current-news.state';
+import { ErrorMessagesService } from './error-messages.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   view$: rx.Observable<CurrentNewsState>;
 
-  constructor(private currentNewsService: CurrentNewsService) {
+  constructor(
+    private currentNewsService: CurrentNewsService,
+    private errorMessagesService: ErrorMessagesService,
+  ) {
     this.view$ = this.currentNewsService.output$;
   }
 
@@ -23,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.errorMessagesService.detach();
     this.currentNewsService.stop();
     this.currentNewsService.finish();
   }

@@ -14,16 +14,10 @@
           </mat-icon>
         </button>
       </mat-toolbar-row>
-      <mat-toolbar-row *ngIf="view.latestNewsError">
-        <button mat-button>
-          <mat-error>{{view.latestNewsError}}</mat-error>
-        </button>
-      </mat-toolbar-row>
     </mat-toolbar>
     <mat-toolbar>
       <!-- Empty toolbar to create top margin -->
       <mat-toolbar-row></mat-toolbar-row>
-      <mat-toolbar-row *ngIf="view.latestNewsError"></mat-toolbar-row>
     </mat-toolbar>
   </ng-container>
 </ng-container>

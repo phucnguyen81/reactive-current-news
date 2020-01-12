@@ -13,6 +13,7 @@ import {
   MatListModule,
   MatSelectModule,
   MatSliderModule,
+  MatSnackBarModule,
   MatToolbarModule,
 } from '@angular/material';
 
@@ -35,8 +36,8 @@ export const APP_MODULE_DECLARATIONS = [
 
 export const APP_MODULE_IMPORTS = [
   AppRoutingModule,
-  BrowserModule,
   BrowserAnimationsModule,
+  BrowserModule,
   HttpClientModule,
   MatButtonModule,
   MatCardModule,
@@ -47,5 +48,6 @@ export const APP_MODULE_IMPORTS = [
   MatListModule,
   MatSelectModule,
   MatSliderModule,
+  MatSnackBarModule,
   MatToolbarModule,
 ];

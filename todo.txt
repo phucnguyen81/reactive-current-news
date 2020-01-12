@@ -1,9 +1,10 @@
+# Show error messages with Snackbar component
+
 # Add apiKey for Settings component
 
-- Let state contain the apiKey
-- If no apiKey, show error
+- If no api-key, show error
+- Ignore fetch without api-key
 - Add Apply button to the toolbar
-- Add api key to current-news.state
 - When Apply is clicked, send api-key-settings event
 - On app.component loading, local-storage sends api-key-storage event
 - On api-key-settings, update key in current-news.state
@@ -11,6 +12,11 @@
 - On api-key-storage, set key if key is missing
 - On fetching, if the key is missing, set error
 - On fetching, if the key is missing, fetching is cancelled
+
+# Create toolbar component with customized action buttons
+- The toolbar on latest-news page has 'Fetch' button
+- The toolbar on settings page has 'Save' button
+=> make toolbar component with customized action buttons
 
 # Learn xstate using this repo for awhile
 
