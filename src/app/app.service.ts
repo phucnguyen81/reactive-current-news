@@ -16,14 +16,14 @@ import { CurrentsApiConnector } from './currentsapi.connector';
 })
 export class AppService {
 
-  readonly view$: rx.Observable<CurrentNewsState>;
+  readonly output$: rx.Observable<CurrentNewsState>;
 
   constructor(
     private currentNewsService: CurrentNewsService,
     private snackBar: MatSnackBar,
     private httpClient: HttpClient,
   ) {
-    this.view$ = this.currentNewsService.output$;
+    this.output$ = this.currentNewsService.output$;
   }
 
   attach(): void {

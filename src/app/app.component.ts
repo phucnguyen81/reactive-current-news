@@ -13,12 +13,12 @@ import { AppService } from './app.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  readonly view$: rx.Observable<CurrentNewsState>;
+  readonly output$: rx.Observable<CurrentNewsState>;
 
   constructor(
     private appService: AppService,
   ) {
-    this.view$ = this.appService.view$;
+    this.output$ = this.appService.output$;
   }
 
   ngOnInit(): void {
