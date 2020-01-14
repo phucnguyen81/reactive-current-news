@@ -23,9 +23,7 @@ export class AppService {
 
   readonly input$: rx.Subject<events.AppEvent>;
 
-  readonly output$ = new rx.BehaviorSubject<CurrentNewsState>(
-    new CurrentNewsState()
-  );
+  readonly output$ = new rx.Observable<CurrentNewsState>();
 
   readonly finish$ = new rx.Subject<any>();
 
@@ -39,7 +37,8 @@ export class AppService {
     private router: Router,
   ) {
     this.currentNews = new CurrentNewsConnector();
-    this.input$ = this.currentNews.input$
+    this.input$ = this.currentNews.input$;
+    this.output$ = this.currentNews.output$;
     this.settings = new SettingsConnector();
   }
 

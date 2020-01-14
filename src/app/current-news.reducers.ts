@@ -4,7 +4,11 @@ import { CurrentNewsState } from './current-news.state';
 export function nextState(
   state: CurrentNewsState, event: events.AppEvent
 ): CurrentNewsState {
-  if ((event instanceof events.FetchLatestNews)) {
+
+  if (event instanceof events.Skip) {
+    return state;
+  }
+  else if ((event instanceof events.FetchLatestNews)) {
     if (!state.fetchingLatestNews) {
       return {
         ...state,
@@ -45,4 +49,5 @@ export function nextState(
   }
 
   return state;
+
 }

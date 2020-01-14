@@ -9,9 +9,7 @@ export class CurrentNewsControl {
 
   readonly input$ = new rx.Subject<events.AppEvent>();
 
-  readonly output$: rx.Observable<CurrentNewsState> = rx.merge(
-    this.input$,
-  ).pipe(
+  readonly output$: rx.Observable<CurrentNewsState> = this.input$.pipe(
     ops.scan<events.AppEvent, CurrentNewsState>(
       nextState, new CurrentNewsState()
     )

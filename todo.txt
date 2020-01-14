@@ -1,19 +1,34 @@
+# Fix the UI not updating the fetchingLatestNews state from the control
+
+Fixed, this is the problem with subscribing to a BehaviorSubject somehome
+messes up the order of events (bugs in rxjs?). Anyway, fallback to directly
+using the output$ from current-news.control.
+
+# Create a tab to show the state
+
 # Settings component with api-key
 
 - On no api-key, show error and guide to go to settings
+  Currently, it shows nothing if api-key is missing, need to fix that
+  => at least show the toolbar, the card with error or the settings page
+
 - Add Apply button to the toolbar to save settings
 - When Apply is clicked, send api-key-settings event
 - On app.component loading, local-storage sends api-key-storage event
 - On api-key-settings, update key in current-news.state
 - On api-key-settings, save the api key to local storage
 - On api-key-storage, set key if key is missing
-- On fetching, if the key is missing, set error
-- On fetching, if the key is missing, fetching is cancelled
+
+# Convert all comonents to use Push change detection
 
 # Create toolbar component with customized action buttons
 - The toolbar on latest-news page has 'Fetch' button
 - The toolbar on settings page has 'Save' button
 => make toolbar component with customized action buttons
+
+# Move rateLimitRemaining to top info
+The rateLimitRemaining is top level info, should not be bound
+to the latestNews.
 
 # Learn xstate using this repo for awhile
 

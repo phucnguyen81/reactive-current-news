@@ -22,8 +22,8 @@ export class CurrentNewsConnector {
 
   connect(appService: AppService): void {
     this.control.output$.pipe(
-      ops.takeUntil(appService.finish$)
-    ).subscribe(appService.output$);
+      ops.takeUntil(appService.finish$),
+    ).subscribe();
   }
 
   start(): void {

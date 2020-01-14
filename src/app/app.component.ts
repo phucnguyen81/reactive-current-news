@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy,
+ChangeDetectorRef, AfterViewInit } from '@angular/core';
 
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
@@ -9,20 +10,25 @@ import { AppService } from './app.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   readonly output$: rx.Observable<CurrentNewsState>;
 
   constructor(
     private appService: AppService,
+    private changeDetector: ChangeDetectorRef,
   ) {
     this.output$ = this.appService.output$;
   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
     this.appService.start();
+    this.changeDetector.detectChanges();
   }
 
   ngOnDestroy(): void {

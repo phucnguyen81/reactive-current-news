@@ -25,12 +25,9 @@ export class MissingApiKeyConnector {
       })
     );
 
-    const errorMessages = new MissingApiKeyControl(
-      this.snackBar,
-      missingApiKey$,
-    );
-
-    errorMessages.output$.pipe(
+    new MissingApiKeyControl(
+      this.snackBar, missingApiKey$
+    ).output$.pipe(
       ops.takeUntil(appService.finish$)
     ).subscribe();
   }

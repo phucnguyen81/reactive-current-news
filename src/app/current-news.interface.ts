@@ -35,6 +35,10 @@ export interface LatestNews {
   rateLimit?: number;   // Daily limit of API keys
 }
 
+export const EMPTY_LATEST_NEWS: LatestNews = {
+  news: [],
+};
+
 export interface News {
   author: string;
   category: string[];

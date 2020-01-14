@@ -19,15 +19,21 @@ export class CurrentsApiControl {
           return (s1.fetchingLatestNews === s2.fetchingLatestNews);
         }
       ),
-      ops.tap(state => {
-        if (state.fetchingLatestNews && state.apiKey) {
-          this.currentsapi.fetchLatestNews(state.apiKey);
+      ops.map(state => {
+        if (state.fetchingLatestNews) {
+          if (state.apiKey) {
+            this.currentsapi.fetchLatestNews(state.apiKey);
+            return new events.FetchingLatestNewsStarted();
+          }
+          else {
+            return new events.FetchingLatestNewsDone();
+          }
         }
         else {
           this.currentsapi.cancelLatestNews();
+          return new events.FetchingLatestNewsCancelled();
         }
       }),
-      ops.skipWhile(() => true),
     );
 
   private readonly receiveLatestNews$: rx.Observable<events.AppEvent> =
