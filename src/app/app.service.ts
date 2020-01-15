@@ -38,7 +38,9 @@ export class AppService {
   ) {
     this.currentNews = new CurrentNewsConnector();
     this.input$ = this.currentNews.input$;
-    this.output$ = this.currentNews.output$;
+    this.output$ = this.currentNews.output$.pipe(
+      ops.shareReplay(1)
+    );
     this.settings = new SettingsConnector();
   }
 
@@ -73,6 +75,10 @@ export class AppService {
 
   goToSettings(): void {
     this.router.navigate(['settings']);
+  }
+
+  goToStatus(): void {
+    this.router.navigate(['status']);
   }
 
   openNewTab(url: string): void {
