@@ -13,7 +13,6 @@ export function nextState(
       return {
         ...state,
         fetchingLatestNews: true,
-        latestNewsError: '',
       };
     }
   }
@@ -35,10 +34,10 @@ export function nextState(
       fetchingLatestNews: false,
     };
   }
-  else if (event instanceof events.LatestNewsError) {
+  else if (event instanceof events.AppError) {
     return {
       ...state,
-      latestNewsError: event.message,
+      error: event.error,
     };
   }
   else if (event instanceof events.ApiKey) {

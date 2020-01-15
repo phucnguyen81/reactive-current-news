@@ -6,16 +6,18 @@ import * as ops from 'rxjs/operators';
 
 export class ErrorMessagesControl {
 
-  readonly output$: rx.Observable<string>;
+  readonly output$: rx.Observable<Error>;
 
   constructor(
     private snackBar: MatSnackBar,
-    private message$: rx.Observable<string>,
+    private error$: rx.Observable<Error>,
   ) {
-    this.output$ = message$.pipe(
+    this.output$ = error$.pipe(
       ops.distinctUntilChanged(),
-      ops.filter(message => !!message),
-      ops.tap(message => this.openSnackBar(message)),
+      ops.filter(error => !!error),
+      ops.tap(error => this.openSnackBar(
+        `${error.name}: ${error.message}`
+      )),
     );
   }
 

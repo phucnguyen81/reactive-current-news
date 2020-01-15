@@ -44,7 +44,7 @@ export class CurrentsApiControl {
 
   private readonly latestNewsError$: rx.Observable<events.AppEvent> =
     this.currentsapi.latestNewsErrorOut$.pipe(
-      ops.map(err => new events.LatestNewsError(err.message))
+      ops.map(err => new events.AppError(err))
     );
 
   private readonly latestNewsComplete$: rx.Observable<events.AppEvent> =

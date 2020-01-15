@@ -13,15 +13,15 @@ export class ErrorMessagesConnector {
   constructor(private snackBar: MatSnackBar) {}
 
   connect(appService: AppService): void {
-    const latestNewsError$ = appService.output$.pipe(
-      ops.map<CurrentNewsState, string>(
-        state => state.latestNewsError
+    const error$ = appService.output$.pipe(
+      ops.map<CurrentNewsState, Error>(
+        state => state.error
       )
     );
 
     const errorMessages = new ErrorMessagesControl(
       this.snackBar,
-      latestNewsError$,
+      error$,
     );
 
     errorMessages.output$.pipe(

@@ -1,16 +1,3 @@
-# Create a tab to show current state
--   [x] Create the component with CLI
--   [ ] Create the route
--   [ ] Copy the code from settings.component
--   [ ] Copy the template from settings.component
-
-This is both for debugging and showing global status of the system.
-
-# Consolidate error
-
-Error messages should not be on the state.
-State should contain Error objects, leave formatting for UI connector.
-
 # Settings component with api-key
 
 - On no api-key, show error and guide to go to settings

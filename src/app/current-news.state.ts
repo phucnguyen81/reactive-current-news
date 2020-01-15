@@ -9,5 +9,5 @@ export class CurrentNewsState {
 
   fetchingLatestNews = false;
 
-  latestNewsError = '';
+  error?: Error;
 }
