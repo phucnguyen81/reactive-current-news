@@ -1,10 +1,15 @@
-# Fix the UI not updating the fetchingLatestNews state from the control
+# Create a tab to show current state
+-   [x] Create the component with CLI
+-   [ ] Create the route
+-   [ ] Copy the code from settings.component
+-   [ ] Copy the template from settings.component
 
-Fixed, this is the problem with subscribing to a BehaviorSubject somehome
-messes up the order of events (bugs in rxjs?). Anyway, fallback to directly
-using the output$ from current-news.control.
+This is both for debugging and showing global status of the system.
 
-# Create a tab to show the state
+# Consolidate error
+
+Error messages should not be on the state.
+State should contain Error objects, leave formatting for UI connector.
 
 # Settings component with api-key
 

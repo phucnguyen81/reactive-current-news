@@ -1,4 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component, OnInit, OnDestroy,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
@@ -10,7 +13,8 @@ import { CurrentNewsState } from './current-news.state';
 @Component({
   selector: 'app-current-news',
   templateUrl: './current-news.component.html',
-  styleUrls: ['./current-news.component.css']
+  styleUrls: ['./current-news.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CurrentNewsComponent implements OnInit, OnDestroy {
 

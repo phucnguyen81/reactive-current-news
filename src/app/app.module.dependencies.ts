@@ -22,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { SettingsComponent } from './settings.component';
 import { CurrentNewsComponent } from './current-news.component';
+import { StatusComponent } from './status.component';
 
 
 export const APP_MODULE_BOOTSTRAP = [
@@ -32,6 +33,7 @@ export const APP_MODULE_DECLARATIONS = [
   AppComponent,
   CurrentNewsComponent,
   SettingsComponent,
+  StatusComponent,
 ];
 
 export const APP_MODULE_IMPORTS = [
