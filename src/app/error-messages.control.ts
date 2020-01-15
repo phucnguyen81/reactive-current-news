@@ -9,8 +9,8 @@ export class ErrorMessagesControl {
   readonly output$: rx.Observable<Error>;
 
   constructor(
-    private snackBar: MatSnackBar,
     private error$: rx.Observable<Error>,
+    private snackBar: MatSnackBar,
   ) {
     this.output$ = error$.pipe(
       ops.distinctUntilChanged(),

@@ -20,8 +20,8 @@ export class ErrorMessagesConnector {
     );
 
     const errorMessages = new ErrorMessagesControl(
-      this.snackBar,
       error$,
+      this.snackBar,
     );
 
     errorMessages.output$.pipe(

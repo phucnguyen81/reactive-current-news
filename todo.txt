@@ -1,9 +1,6 @@
 # Settings component with api-key
 
 - On no api-key, show error and guide to go to settings
-  Currently, it shows nothing if api-key is missing, need to fix that
-  => at least show the toolbar, the card with error or the settings page
-
 - Add Apply button to the toolbar to save settings
 - When Apply is clicked, send api-key-settings event
 - On app.component loading, local-storage sends api-key-storage event
@@ -11,7 +8,7 @@
 - On api-key-settings, save the api key to local storage
 - On api-key-storage, set key if key is missing
 
-# Convert all comonents to use Push change detection
+# Escape html on news contents
 
 # Create toolbar component with customized action buttons
 - The toolbar on latest-news page has 'Fetch' button
