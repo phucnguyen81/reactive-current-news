@@ -1,4 +1,5 @@
 import { LatestNews, EMPTY_LATEST_NEWS } from './current-news.interface';
+import * as events from './current-news.events';
 
 export class CurrentNewsState {
   title = 'Current News';
@@ -10,4 +11,6 @@ export class CurrentNewsState {
   fetchingLatestNews = false;
 
   error?: Error;
+
+  gotoEvent: events.GotoEvent = new events.GotoNowhere();
 }

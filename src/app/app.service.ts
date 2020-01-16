@@ -14,6 +14,7 @@ import { ErrorMessagesConnector } from './error-messages.connector';
 import { MissingApiKeyConnector } from './missing-api-key.connector';
 import { CurrentsApiConnector } from './currentsapi.connector';
 import { SettingsConnector } from './settings.connector';
+import { RouterConnector } from './router.connector';
 
 
 @Injectable({
@@ -23,7 +24,7 @@ export class AppService {
 
   readonly input$: rx.Subject<events.AppEvent>;
 
-  readonly output$ = new rx.Observable<CurrentNewsState>();
+  readonly output$: rx.Observable<CurrentNewsState>;
 
   readonly finish$ = new rx.Subject<any>();
 
@@ -36,12 +37,13 @@ export class AppService {
     private httpClient: HttpClient,
     private router: Router,
   ) {
+    this.settings = new SettingsConnector();
+
     this.currentNews = new CurrentNewsConnector();
     this.input$ = this.currentNews.input$;
     this.output$ = this.currentNews.output$.pipe(
       ops.shareReplay(1)
     );
-    this.settings = new SettingsConnector();
   }
 
   start(): void {
@@ -50,12 +52,14 @@ export class AppService {
     const errorMessages = new ErrorMessagesConnector(this.snackBar);
     const missingApiKey = new MissingApiKeyConnector(this.snackBar);
     const settings = this.settings;
+    const rounting = new RouterConnector(this.router);
 
     currentNews.connect(this);
     currentsapi.connect(this);
     errorMessages.connect(this);
     missingApiKey.connect(this);
     settings.connect(this);
+    rounting.connect(this);
 
     this.currentNews.start();
   }
@@ -70,15 +74,15 @@ export class AppService {
   }
 
   goToHome(): void {
-    this.router.navigate(['']);
+    this.input$.next(new events.GotoHome());
   }
 
   goToSettings(): void {
-    this.router.navigate(['settings']);
+    this.input$.next(new events.GotoSettings());
   }
 
   goToStatus(): void {
-    this.router.navigate(['status']);
+    this.input$.next(new events.GotoStatus());
   }
 
   openNewTab(url: string): void {

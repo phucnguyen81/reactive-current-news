@@ -19,6 +19,29 @@ export class AppError extends AppEvent {
 
 export class Skip extends AppEvent { }
 
+export abstract class GotoEvent extends AppEvent { }
+
+export class GotoNowhere extends GotoEvent { }
+export class GotoHome extends GotoEvent { }
+export class GotoSettings extends GotoEvent { }
+export class GotoStatus extends GotoEvent { }
+
+export class GotoSuccess extends GotoEvent {
+  constructor(readonly gotoEvent: GotoEvent) {
+    super();
+  }
+}
+export class GotoFailed extends GotoEvent {
+  constructor(readonly gotoEvent: GotoEvent) {
+    super();
+  }
+}
+export class GotoError extends GotoEvent {
+  constructor(readonly gotoEvent: GotoEvent, readonly error: Error) {
+    super();
+  }
+}
+
 export class ReceiveLatestNews extends AppEvent {
   constructor(public latestNews: LatestNews) {
     super();
@@ -37,3 +60,5 @@ export class ApiKey extends AppEvent {
     super();
   }
 }
+
+export class GoToSettings extends AppEvent { }

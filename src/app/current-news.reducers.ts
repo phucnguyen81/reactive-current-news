@@ -8,7 +8,13 @@ export function nextState(
   if (event instanceof events.Skip) {
     return state;
   }
-  else if ((event instanceof events.FetchLatestNews)) {
+  else if (event instanceof events.GotoEvent) {
+    return {
+      ...state,
+      gotoEvent: event,
+    };
+  }
+  else if (event instanceof events.FetchLatestNews) {
     if (!state.fetchingLatestNews) {
       return {
         ...state,
@@ -50,3 +56,4 @@ export function nextState(
   return state;
 
 }
+
