@@ -3,26 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
+import * as events from './current-news.events';
+
 import { AppService } from './app.service';
 import { CurrentsApiPlant } from './currentsapi.plant';
 import { CurrentsApiControl } from './currentsapi.control';
 
-/**
- * Connect currentsapi to current-news
- */
 export class CurrentsApiConnector {
-
   constructor(private httpClient: HttpClient) {}
 
-  connect(appService: AppService): void {
+  connect(appService: AppService): rx.Observable<events.AppEvent> {
     const currentsapi = new CurrentsApiControl(
       appService.output$,
       new CurrentsApiPlant(this.httpClient),
     );
 
-    currentsapi.output$.pipe(
-      ops.takeUntil(appService.finish$)
-    ).subscribe(appService.input$);
+    return currentsapi.output$;
   }
-
 }

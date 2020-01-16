@@ -55,9 +55,9 @@ export class AppService {
     const rounting = new RouterConnector(this.router);
 
     currentNews.connect(this);
-    currentsapi.connect(this);
 
     rx.merge<events.AppEvent>(
+      currentsapi.connect(this),
       errorMessages.connect(this),
       settings.connect(this),
       missingApiKey.connect(this),
