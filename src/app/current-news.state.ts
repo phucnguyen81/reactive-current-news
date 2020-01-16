@@ -14,7 +14,7 @@ export class CurrentNewsState {
 
   error?: Error;
 
-  gotoEvent: events.GotoEvent = new events.GotoNowhere();
+  gotoEvent?: events.GotoEvent;
 }
 
 export type CurrentNewsEvents = rx.Observable<events.AppEvent>;
