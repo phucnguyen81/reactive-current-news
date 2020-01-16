@@ -6,10 +6,15 @@ import * as ops from 'rxjs/operators';
 import * as events from './current-news.events';
 import { CurrentNewsState } from './current-news.state';
 import { AppService } from './app.service';
+import { RouterControl, RouterResult } from './router.control';
 
 export class RouterConnector {
 
-  constructor(private router: Router) { }
+  private readonly control: RouterControl;
+
+  constructor(private router: Router) {
+    this.control = new RouterControl(router);
+  }
 
   connect(appService: AppService): void {
     appService.output$.pipe(
@@ -45,20 +50,18 @@ export class RouterConnector {
     gotoEvent: events.GotoEvent,
     commands: string[]
   ): rx.Observable<events.GotoEvent> {
-    return rx.from(
-      this.router.navigate(commands)
-    ).pipe(
-      ops.switchMap(success => {
-        if (success) {
-          return rx.of([new events.GotoSuccess(gotoEvent)]);
+    return this.control.navigate(commands).pipe(
+      ops.map<RouterResult, events.GotoEvent>(result => {
+        if (result.success) {
+          return new events.GotoSuccess(gotoEvent);
+        }
+        else if (result.error) {
+          return new events.GotoError(gotoEvent, result.error);
         }
         else {
-          return rx.of([new events.GotoFailed(gotoEvent)]);
+          return new events.GotoFailed(gotoEvent);
         }
-      }),
-      ops.catchError(err => {
-        return rx.of([new events.GotoError(gotoEvent, err)]);
-      }),
+      })
     );
   }
 
