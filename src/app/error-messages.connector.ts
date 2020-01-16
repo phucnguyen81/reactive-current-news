@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import * as rx from 'rxjs';
