@@ -58,10 +58,10 @@ export class AppService {
     currentsapi.connect(this);
     errorMessages.connect(this);
     missingApiKey.connect(this);
-    settings.connect(this);
 
     rx.merge<events.AppEvent>(
-      rounting.connect(this)
+      settings.connect(this),
+      rounting.connect(this),
     ).pipe<events.AppEvent>(
       ops.takeUntil(this.finish$)
     ).subscribe(this.input$);

@@ -10,11 +10,10 @@ export class SettingsConnector {
 
   private readonly settings = new SettingsControl();
 
-  connect(appService: AppService): void {
-    this.settings.apiKey$.pipe(
+  connect(appService: AppService): rx.Observable<events.AppEvent> {
+    return this.settings.apiKey$.pipe(
       ops.map(apiKey => new events.ApiKey(apiKey)),
-      ops.takeUntil(appService.finish$),
-    ).subscribe(appService.input$)
+    );
   }
 
   changeApiKey(apiKey: string): void {
