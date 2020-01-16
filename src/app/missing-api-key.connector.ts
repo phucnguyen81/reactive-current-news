@@ -13,16 +13,13 @@ import { SnackBarControl } from './snackbar.control';
 import { MissingApiKeyControl } from './missing-api-key.control';
 
 export class MissingApiKeyConnector {
-
   constructor(private snackBar: MatSnackBar) {}
 
-  connect(appService: AppService): void {
-    appService.output$.pipe(
+  connect(appService: AppService): rx.Observable<events.AppEvent> {
+    return appService.output$.pipe(
       showMissingApiKeyMessage(this.snackBar),
-      ops.takeUntil(appService.finish$),
-    ).subscribe(appService.input$);
+    );
   }
-
 }
 
 function showMissingApiKeyMessage(

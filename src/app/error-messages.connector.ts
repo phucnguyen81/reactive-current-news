@@ -5,14 +5,14 @@ import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
 import { AppService } from './app.service';
+import * as events from './current-news.events';
 import { CurrentNewsState } from './current-news.state';
 import { ErrorMessagesControl } from './error-messages.control';
 
 export class ErrorMessagesConnector {
-
   constructor(private snackBar: MatSnackBar) {}
 
-  connect(appService: AppService): void {
+  connect(appService: AppService): rx.Observable<events.AppEvent> {
     const error$ = appService.output$.pipe(
       ops.map<CurrentNewsState, Error>(
         state => state.error
@@ -24,9 +24,8 @@ export class ErrorMessagesConnector {
       this.snackBar,
     );
 
-    errorMessages.output$.pipe(
-      ops.takeUntil(appService.finish$)
-    ).subscribe();
+    return errorMessages.output$.pipe(
+      ops.mapTo(new events.Skip())
+    );
   }
-
 }
