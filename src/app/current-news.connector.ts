@@ -20,10 +20,8 @@ export class CurrentNewsConnector {
     this.output$ = this.control.output$;
   }
 
-  connect(appService: AppService): void {
-    this.control.output$.pipe(
-      ops.takeUntil(appService.finish$),
-    ).subscribe();
+  connect(appService: AppService): rx.Observable<CurrentNewsState> {
+    return this.control.output$;
   }
 
   start(): void {

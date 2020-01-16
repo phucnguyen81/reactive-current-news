@@ -54,7 +54,9 @@ export class AppService {
     const settings = this.settings;
     const rounting = new RouterConnector(this.router);
 
-    currentNews.connect(this);
+    currentNews.connect(this).pipe<CurrentNewsState>(
+      ops.takeUntil(this.finish$)
+    ).subscribe();
 
     rx.merge<events.AppEvent>(
       currentsapi.connect(this),
