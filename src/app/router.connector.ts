@@ -55,7 +55,10 @@ export class RouterConnector {
         else {
           return rx.of([new events.GotoFailed(gotoEvent)]);
         }
-      })
+      }),
+      ops.catchError(err => {
+        return rx.of([new events.GotoError(gotoEvent, err)]);
+      }),
     );
   }
 
