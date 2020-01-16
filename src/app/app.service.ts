@@ -59,7 +59,11 @@ export class AppService {
     errorMessages.connect(this);
     missingApiKey.connect(this);
     settings.connect(this);
-    rounting.connect(this);
+    rx.merge(
+      rounting.connect(this)
+    ).pipe(
+      ops.takeUntil(this.finish$)
+    ).subscribe(this.input$);
 
     this.currentNews.start();
   }

@@ -16,8 +16,8 @@ export class RouterConnector {
     this.control = new RouterControl(router);
   }
 
-  connect(appService: AppService): void {
-    appService.output$.pipe(
+  connect(appService: AppService): rx.Observable<events.AppEvent> {
+    return appService.output$.pipe(
       ops.map<CurrentNewsState, events.GotoEvent>(
         state => state.gotoEvent
       ),
@@ -25,8 +25,7 @@ export class RouterConnector {
       ops.switchMap(gotoEvent => {
         return this.gotoAction(gotoEvent);
       }),
-      ops.takeUntil(appService.finish$),
-    ).subscribe(appService.input$);
+    );
   }
 
   private gotoAction(
