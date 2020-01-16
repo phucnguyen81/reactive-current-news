@@ -22,48 +22,43 @@ import { RouterConnector } from './router.connector';
 })
 export class AppService {
 
-  readonly input$: rx.Subject<events.AppEvent>;
+  private readonly currentNews = new CurrentNewsConnector();
 
-  readonly output$: rx.Observable<CurrentNewsState>;
+  readonly input$: rx.Subject<events.AppEvent> =
+    this.currentNews.input$;
+
+  readonly output$: rx.Observable<CurrentNewsState> =
+    this.currentNews.output$.pipe(ops.shareReplay(1));
 
   readonly finish$ = new rx.Subject<any>();
 
-  private readonly currentNews: CurrentNewsConnector;
+  private readonly settings = new SettingsConnector();
 
-  private readonly settings: SettingsConnector;
+  private readonly currentsapi = new CurrentsApiConnector(this.httpClient);
+
+  private readonly errorMessages = new ErrorMessagesConnector(this.snackBar);
+
+  private readonly missingApiKey = new MissingApiKeyConnector(this.snackBar);
+
+  private readonly rounting = new RouterConnector(this.router);
 
   constructor(
     private snackBar: MatSnackBar,
     private httpClient: HttpClient,
-    private router: Router,
-  ) {
-    this.settings = new SettingsConnector();
-
-    this.currentNews = new CurrentNewsConnector();
-    this.input$ = this.currentNews.input$;
-    this.output$ = this.currentNews.output$.pipe(
-      ops.shareReplay(1)
-    );
-  }
+    private router: Router
+  ) { }
 
   start(): void {
-    const currentNews = this.currentNews;
-    const currentsapi = new CurrentsApiConnector(this.httpClient);
-    const errorMessages = new ErrorMessagesConnector(this.snackBar);
-    const missingApiKey = new MissingApiKeyConnector(this.snackBar);
-    const settings = this.settings;
-    const rounting = new RouterConnector(this.router);
-
-    currentNews.connect(this).pipe<CurrentNewsState>(
+    this.currentNews.connect(this).pipe<CurrentNewsState>(
       ops.takeUntil(this.finish$)
     ).subscribe();
 
     rx.merge<events.AppEvent>(
-      currentsapi.connect(this),
-      errorMessages.connect(this),
-      settings.connect(this),
-      missingApiKey.connect(this),
-      rounting.connect(this),
+      this.currentsapi.connect(this),
+      this.errorMessages.connect(this),
+      this.settings.connect(this),
+      this.missingApiKey.connect(this),
+      this.rounting.connect(this),
     ).pipe<events.AppEvent>(
       ops.takeUntil(this.finish$)
     ).subscribe(this.input$);
