@@ -9,17 +9,20 @@ import { GotoSettings } from './current-news.events';
 
 import { AppService } from './app.service';
 import { CurrentNewsState } from './current-news.state';
-import { SnackBarControl } from './snackbar.control';
 import { MissingApiKeyControl } from './missing-api-key.control';
 
 export class MissingApiKeyConnector {
-  constructor(private snackBar: MatSnackBar) {}
 
-  connect(appService: AppService): rx.Observable<events.AppEvent> {
-    return appService.output$.pipe(
+  readonly output$: rx.Observable<events.AppEvent> =
+    this.appService.output$.pipe(
       showMissingApiKeyMessage(this.snackBar),
     );
-  }
+
+  constructor(
+    private snackBar: MatSnackBar,
+    private appService: AppService,
+  ) {}
+
 }
 
 function showMissingApiKeyMessage(

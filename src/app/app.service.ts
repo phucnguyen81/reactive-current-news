@@ -38,7 +38,9 @@ export class AppService {
 
   private readonly errorMessages = new ErrorMessagesConnector(this.snackBar);
 
-  private readonly missingApiKey = new MissingApiKeyConnector(this.snackBar);
+  private readonly missingApiKey = new MissingApiKeyConnector(
+    this.snackBar, this
+  );
 
   private readonly rounting = new RouterConnector(this.router, this);
 
@@ -57,7 +59,7 @@ export class AppService {
       this.currentsapi.connect(this),
       this.errorMessages.connect(this),
       this.settings.output$,
-      this.missingApiKey.connect(this),
+      this.missingApiKey.output$,
       this.rounting.output$,
     ).pipe<events.AppEvent>(
       ops.takeUntil(this.finish$)
