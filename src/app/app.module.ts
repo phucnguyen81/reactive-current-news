@@ -9,7 +9,7 @@ import {
 
 @NgModule({
   declarations: [
-    ...APP_MODULE_DECLARATIONS,
+    ...APP_MODULE_DECLARATIONS
   ],
   imports: [
     ...APP_MODULE_IMPORTS

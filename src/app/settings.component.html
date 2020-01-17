@@ -1,31 +1,6 @@
-<ng-container *ngIf="output$ | async as view">
-  <ng-container *ngIf="view.latestNews as latestNews">
-    <mat-toolbar class="fixed-header" color="primary">
-      <mat-toolbar-row>
-        <button mat-button (click)="goToHome()">{{view.title}}</button>
-        <button mat-button (click)="save()">Save</button>
-        <span class="example-fill-remaining-space"></span>
-        <button mat-button>
-          Today remaining requests: {{latestNews.rateLimitRemaining}}
-        </button>
-        <button mat-button (click)="goToSettings()">
-          <mat-icon aria-hidden="false" aria-label="Application Settings">
-            settings_applications
-          </mat-icon>
-        </button>
-        <button mat-button (click)="goToStatus()">
-          <mat-icon aria-hidden="false" aria-label="Application Status">
-            info
-          </mat-icon>
-        </button>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <mat-toolbar>
-      <!-- Empty toolbar to create top margin -->
-      <mat-toolbar-row></mat-toolbar-row>
-    </mat-toolbar>
-  </ng-container>
-</ng-container>
+<app-toolbar>
+  <button mat-button (click)="save()">Save</button>
+</app-toolbar>
 
 <div class="example-container">
   <mat-form-field>

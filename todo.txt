@@ -1,8 +1,6 @@
 # Create toolbar component with customized action buttons
-- Move the 'Save' button to the toolbar
-- The toolbar on latest-news page has 'Fetch' button
-- The toolbar on settings page has 'Save' button
-=> make toolbar component with customized action buttons
+-   [x] each page has its own toolbar
+-   [ ] extract the toolbar out of current-news.component.html
 
 # Make settings component with api-key
 

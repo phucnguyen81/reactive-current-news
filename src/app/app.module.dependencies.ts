@@ -20,6 +20,7 @@ import {
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { ToolbarComponent } from './toolbar.component';
 import { SettingsComponent } from './settings.component';
 import { CurrentNewsComponent } from './current-news.component';
 import { StatusComponent } from './status.component';
@@ -31,6 +32,7 @@ export const APP_MODULE_BOOTSTRAP = [
 
 export const APP_MODULE_DECLARATIONS = [
   AppComponent,
+  ToolbarComponent,
   CurrentNewsComponent,
   SettingsComponent,
   StatusComponent,
