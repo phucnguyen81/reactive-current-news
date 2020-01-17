@@ -57,7 +57,9 @@ export class AppService {
     this.rounting.output$,
   );
 
-  private readonly effectSubscription = this.effect$.subscribe(this.input$);
+  private readonly effectSubscription = this.effect$.subscribe(
+    this.input$
+  );
 
   constructor(
     private snackBar: MatSnackBar,
@@ -66,7 +68,7 @@ export class AppService {
   ) { }
 
   start(): void {
-    this.fetch();
+    this.fetchLatestNews();
   }
 
   stop(): void {
@@ -78,7 +80,7 @@ export class AppService {
     this.input$.next(event);
   }
 
-  fetch(): void {
+  fetchLatestNews(): void {
     this.input$.next(new events.FetchLatestNews());
   }
 

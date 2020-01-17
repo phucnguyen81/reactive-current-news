@@ -1,6 +1,5 @@
 import {
-  Component, OnInit, OnDestroy, AfterViewInit,
-  ChangeDetectionStrategy, ChangeDetectorRef
+  Component, OnInit, OnDestroy, ChangeDetectionStrategy
 } from '@angular/core';
 
 import * as rx from 'rxjs';
@@ -15,23 +14,15 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AppComponent implements OnInit, OnDestroy {
 
-  readonly output$: rx.Observable<CurrentNewsState>;
+  readonly output$: rx.Observable<CurrentNewsState> =
+    this.appService.output$;
 
-  constructor(
-    private appService: AppService,
-    private changeDetector: ChangeDetectorRef,
-  ) {
-    this.output$ = this.appService.output$;
-  }
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
     this.appService.start();
-    this.changeDetector.detectChanges();
   }
 
   ngOnDestroy(): void {
@@ -39,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   fetch(): void {
-    this.appService.fetch();
+    this.appService.fetchLatestNews();
   }
 
   goToHome(): void {
