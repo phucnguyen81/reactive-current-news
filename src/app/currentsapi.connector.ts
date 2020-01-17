@@ -10,14 +10,15 @@ import { CurrentsApiPlant } from './currentsapi.plant';
 import { CurrentsApiControl } from './currentsapi.control';
 
 export class CurrentsApiConnector {
-  constructor(private httpClient: HttpClient) {}
 
-  connect(appService: AppService): rx.Observable<events.AppEvent> {
-    const currentsapi = new CurrentsApiControl(
-      appService.output$,
-      new CurrentsApiPlant(this.httpClient),
-    );
+  readonly output$: rx.Observable<events.AppEvent> = new CurrentsApiControl(
+    this.appService.output$,
+    new CurrentsApiPlant(this.httpClient),
+  ).output$;
 
-    return currentsapi.output$;
-  }
+  constructor(
+    private httpClient: HttpClient,
+    private appService: AppService,
+  ) {}
+
 }
