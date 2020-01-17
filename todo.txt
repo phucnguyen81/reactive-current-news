@@ -1,9 +1,10 @@
-# Consider removing current-news.control and current-news.connector
-Now that the code has been moved into app.service, consider removing these components.
+# Create toolbar component with customized action buttons
+- The toolbar on latest-news page has 'Fetch' button
+- The toolbar on settings page has 'Save' button
+=> make toolbar component with customized action buttons
 
-# Settings component with api-key
+# Make settings component with api-key
 
-- On no api-key, show error and guide to go to settings
 - Add Apply button to the toolbar to save settings
 - When Apply is clicked, send api-key-settings event
 - On app.component loading, local-storage sends api-key-storage event
@@ -15,16 +16,11 @@ Now that the code has been moved into app.service, consider removing these compo
 Example of error shown on console:
 [HPM] Error occurred while trying to proxy request /v1/latest-news?language=en from localhost:4200 to https://api.currentsapi.services (ECONNRESET) (https://nodejs.org/api/errors.html#errors_common_system_errors)
 
-# Verify and let user know there are no changes on the feed (after fetch)
+# After fetching, notify if there are no changes on the feed
 
 # Run with offline mode
 
 # Escape html on news contents
-
-# Create toolbar component with customized action buttons
-- The toolbar on latest-news page has 'Fetch' button
-- The toolbar on settings page has 'Save' button
-=> make toolbar component with customized action buttons
 
 # Move rateLimitRemaining to top info
 The rateLimitRemaining is top level info, should not be bound

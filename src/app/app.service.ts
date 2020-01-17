@@ -57,7 +57,7 @@ export class AppService {
     this.rounting.output$,
   );
 
-  private readonly finish$ = new rx.Subject<any>();
+  private readonly effectSubscription = this.effect$.subscribe(this.input$);
 
   constructor(
     private snackBar: MatSnackBar,
@@ -66,16 +66,12 @@ export class AppService {
   ) { }
 
   start(): void {
-    this.effect$.pipe<events.AppEvent>(
-      ops.takeUntil(this.finish$)
-    ).subscribe(this.input$);
-
     this.fetch();
   }
 
   stop(): void {
     this.cancelFetchingLatestNews();
-    this.finish$.next(true);
+    this.effectSubscription.unsubscribe();
   }
 
   send(event: events.AppEvent): void {
