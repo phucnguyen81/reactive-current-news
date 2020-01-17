@@ -1,7 +1,3 @@
-# Create toolbar component with customized action buttons
--   [x] each page has its own toolbar
--   [ ] extract the toolbar out of current-news.component.html
-
 # Make settings component with api-key
 
 - Add Apply button to the toolbar to save settings
