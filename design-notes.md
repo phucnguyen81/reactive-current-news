@@ -1,24 +1,16 @@
-# Insprirations 
+# Insprirations
 
--   Industrial control system
--   Closed-loop process control
--   PLC board (Programmable Logic Controller)
 -   Flow-based programming
 -   Statecharts (will use xState later)
-
-TODO: sort out the influences of each method
+-   The book 'Constructing UI with Statecharts)
+-   Closed-loop process control
+-   Industrial control system (reading)
 
 # Design ideas (on-going)
 
 There is a centralized control of the app called the Main Controller.
-
-The Main Controller coordinates the following components:
--   The central logic control called control center
--   The connectors that connect the control center to other controls
-
-The control center is the brain of the Main Controller.
-The control center does not perform actions, its purpose is to maintain the
-state of the Main Controller.
-
+The Main Controller coordinates central logic control and the plant.
+The central logic contains the system state from user's perspective.
+The plant perform actions (effect).
+The plant's outputs become feedback events for the central logic control.
 The UI is just a special control.
-All UI components can send events to the Main Controller.

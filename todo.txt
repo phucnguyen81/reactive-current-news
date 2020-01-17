@@ -55,6 +55,8 @@ HttpClient, Router
 # Switch themes
 https://material.angular.io/guide/theming
 
+# Convert css to ngStyle control
+
 # Flash the 'Today remaining requests' if it changes
 Also find an icon for it
 
@@ -65,4 +67,3 @@ Also find an icon for it
 # Check out examples/ideas for news feed
 -   https://news.google.com
 -   https://www.newsweek.com/newsfeed
-
