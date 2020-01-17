@@ -10,15 +10,15 @@ TODO: sort out the influences of each method
 
 # Design ideas (on-going)
 
-There is a centralized control of the app called the HQ.
+There is a centralized control of the app called the Main Controller.
 
-The HQ coordinates the following components:
+The Main Controller coordinates the following components:
 -   The central logic control called control center
 -   The connectors that connect the control center to other controls
 
-The control center is the brain of the HQ.
+The control center is the brain of the Main Controller.
 The control center does not perform actions, its purpose is to maintain the
-state of the HQ.
+state of the Main Controller.
 
 The UI is just a special control.
-All UI components can send events to the HQ.
+All UI components can send events to the Main Controller.
