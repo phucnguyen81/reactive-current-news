@@ -28,9 +28,25 @@ export class CurrentNewsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void { }
 
+  fetch(): void {
+    this.appService.fetchLatestNews();
+  }
+
   openNewTab(news: News, event: Event): void {
     event.preventDefault();
     this.appService.openNewTab(news.url);
+  }
+
+  goToHome(): void {
+    this.appService.goToHome();
+  }
+
+  goToSettings(): void {
+    this.appService.goToSettings();
+  }
+
+  goToStatus(): void {
+    this.appService.goToStatus();
   }
 
 }

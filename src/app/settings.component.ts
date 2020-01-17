@@ -6,6 +6,7 @@ import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
 import { AppService } from './app.service';
+import { CurrentNewsState } from './current-news.state';
 
 @Component({
   selector: 'app-settings',
@@ -15,10 +16,11 @@ import { AppService } from './app.service';
 })
 export class SettingsComponent implements OnInit {
 
+  readonly output$: rx.Observable<CurrentNewsState> =
+    this.appService.output$;
+
   readonly apiKey$: rx.Observable<string> =
-    this.appService.output$.pipe(
-      ops.map(state => state.apiKey)
-    );
+    this.output$.pipe(ops.map(state => state.apiKey));
 
   constructor(private appService: AppService) { }
 
@@ -31,6 +33,22 @@ export class SettingsComponent implements OnInit {
 
   saveApiKey(): void {
     this.appService.saveApiKey();
+  }
+
+  save(): void {
+    this.saveApiKey();
+  }
+
+  goToHome(): void {
+    this.appService.goToHome();
+  }
+
+  goToSettings(): void {
+    this.appService.goToSettings();
+  }
+
+  goToStatus(): void {
+    this.appService.goToStatus();
   }
 
 }

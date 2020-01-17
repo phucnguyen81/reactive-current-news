@@ -1,4 +1,5 @@
 # Create toolbar component with customized action buttons
+- Move the 'Save' button to the toolbar
 - The toolbar on latest-news page has 'Fetch' button
 - The toolbar on settings page has 'Save' button
 => make toolbar component with customized action buttons

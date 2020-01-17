@@ -33,6 +33,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.appService.fetchLatestNews();
   }
 
+  save(): void {
+    this.appService.saveApiKey();
+  }
+
   goToHome(): void {
     this.appService.goToHome();
   }

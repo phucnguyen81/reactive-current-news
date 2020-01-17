@@ -24,4 +24,16 @@ export class StatusComponent implements OnInit {
   ngOnInit() {
   }
 
+  goToHome(): void {
+    this.appService.goToHome();
+  }
+
+  goToSettings(): void {
+    this.appService.goToSettings();
+  }
+
+  goToStatus(): void {
+    this.appService.goToStatus();
+  }
+
 }
