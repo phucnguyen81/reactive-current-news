@@ -1,11 +1,10 @@
-# Make settings component with api-key
+# Make window control for the window object
+-   Call window.open(url, '_blank') to open new tab
+-   Failed/sucess => returned from the window.open call
 
-- Add Apply button to the toolbar to save settings
-- When Apply is clicked, send api-key-settings event
-- On app.component loading, local-storage sends api-key-storage event
-- On api-key-settings, update key in current-news.state
-- On api-key-settings, save the api key to local storage
-- On api-key-storage, set key if key is missing
+# Design (local) storage to persist state
+
+# Improve status to show recent sequence of (state, event)
 
 # Show error of type Gateway timeout
 Example of error shown on console:
@@ -14,8 +13,6 @@ Example of error shown on console:
 # After fetching, notify if there are no changes on the feed
 
 # Run with offline mode
-
-# Escape html on news contents
 
 # Move rateLimitRemaining to top info
 The rateLimitRemaining is top level info, should not be bound
@@ -27,19 +24,13 @@ to the latestNews.
 
 # Create use cases
 
-# Describe the app dataflow
+# Describe the app dataflow with Node-RED
 
-# Describe the app main control with statecharts
-
-# Make OpenNewTab event
+# Describe the app main controller logic with statecharts
 
 # Use an icon for 'Today remaining requests'
 
 # Add search box to the top toolbar
-
-# Add 'Fetch' button to the toolbar
-
-# Show error messages (as popup or special card?)
 
 # Show warning if rate limit drops under a threshold
 
@@ -54,21 +45,24 @@ Use local storage as data store for keeping settings
 -   Timeout for HttpClient
 -   Timeout for currentsapi
 
-# Prevent doing multiple fetches at the same time
-Done at the code level, but let's do the refresh button first so that this can
-be tested manually.
-
 # Maintain a fixed number of news cards on screen
 When the on-screen news cards drop below a certain threshold, fill it up with
 new/available news cards
 
-# Check out examples/ideas for news feed
--   https://news.google.com
--   https://www.newsweek.com/newsfeed
+# Learn angular control design
+HttpClient, Router
 
 # Switch themes
 https://material.angular.io/guide/theming
 
 # Flash the 'Today remaining requests' if it changes
+Also find an icon for it
 
 # Rename current-news component to latest-news
+
+# Escape html on news contents
+
+# Check out examples/ideas for news feed
+-   https://news.google.com
+-   https://www.newsweek.com/newsfeed
+
