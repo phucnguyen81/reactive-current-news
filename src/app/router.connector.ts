@@ -63,11 +63,11 @@ export class RouterConnector {
   ): rx.Observable<events.GotoEvent> {
     return this.control.navigate(commands).pipe(
       ops.map<RouterResult, events.GotoEvent>(result => {
-        if (result.success) {
-          return new events.GotoSuccess(gotoEvent);
-        }
-        else if (result.error) {
+        if (result.error) {
           return new events.GotoError(gotoEvent, result.error);
+        }
+        else if (result.success) {
+          return new events.GotoSuccess(gotoEvent);
         }
         else {
           return new events.GotoFailed(gotoEvent);

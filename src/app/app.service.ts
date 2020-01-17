@@ -56,7 +56,7 @@ export class AppService {
     rx.merge<events.AppEvent>(
       this.currentsapi.connect(this),
       this.errorMessages.connect(this),
-      this.settings.connect(this),
+      this.settings.output$,
       this.missingApiKey.connect(this),
       this.rounting.output$,
     ).pipe<events.AppEvent>(
