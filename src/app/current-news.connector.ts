@@ -8,32 +8,18 @@ import { AppService } from './app.service';
 
 export class CurrentNewsConnector {
 
-  private readonly control: CurrentNewsControl;
+  private readonly control = new CurrentNewsControl();
 
-  readonly input$: rx.Subject<events.AppEvent>;
+  readonly input$ = this.control.input$;
 
-  readonly output$: rx.Observable<CurrentNewsState>;
-
-  constructor() {
-    this.control = new CurrentNewsControl();
-    this.input$ = this.control.input$;
-    this.output$ = this.control.output$;
-  }
-
-  connect(appService: AppService): rx.Observable<CurrentNewsState> {
-    return this.control.output$;
-  }
-
-  start(): void {
-    this.control.fetchLatestNews();
-  }
-
-  stop(): void {
-    this.control.cancelFetchingLatestNews();
-  }
+  readonly output$ = this.control.output$.pipe(ops.shareReplay(1));
 
   fetchLatestNews(): void {
     this.control.fetchLatestNews();
+  }
+
+  cancelFetchingLatestNews(): void {
+    this.control.cancelFetchingLatestNews();
   }
 
 }

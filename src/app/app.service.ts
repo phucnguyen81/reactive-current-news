@@ -28,7 +28,7 @@ export class AppService {
     this.currentNews.input$;
 
   readonly output$: rx.Observable<CurrentNewsState> =
-    this.currentNews.output$.pipe(ops.shareReplay(1));
+    this.currentNews.output$;
 
   readonly finish$ = new rx.Subject<any>();
 
@@ -55,7 +55,7 @@ export class AppService {
   ) { }
 
   start(): void {
-    this.currentNews.connect(this).pipe<CurrentNewsState>(
+    this.currentNews.output$.pipe<CurrentNewsState>(
       ops.takeUntil(this.finish$)
     ).subscribe();
 
@@ -69,11 +69,11 @@ export class AppService {
       ops.takeUntil(this.finish$)
     ).subscribe(this.input$);
 
-    this.currentNews.start();
+    this.currentNews.fetchLatestNews();
   }
 
   stop(): void {
-    this.currentNews.stop();
+    this.currentNews.cancelFetchingLatestNews();
     this.finish$.next(true);
   }
 
