@@ -9,10 +9,16 @@ import { CurrentNewsState } from './current-news.state';
 import { ErrorMessagesControl } from './error-messages.control';
 
 export class ErrorMessagesConnector {
-  constructor(private snackBar: MatSnackBar) {}
 
-  connect(appService: AppService): rx.Observable<events.AppEvent> {
-    const error$ = appService.output$.pipe(
+  readonly output$: rx.Observable<events.AppEvent> = this.connect();
+
+  constructor(
+    private snackBar: MatSnackBar,
+    private appService: AppService,
+  ) {}
+
+  private connect(): rx.Observable<events.AppEvent> {
+    const error$ = this.appService.output$.pipe(
       ops.map<CurrentNewsState, Error>(
         state => state.error
       )
@@ -27,4 +33,5 @@ export class ErrorMessagesConnector {
       ops.mapTo(new events.Skip())
     );
   }
+
 }

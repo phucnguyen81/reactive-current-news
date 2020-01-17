@@ -36,7 +36,9 @@ export class AppService {
 
   private readonly currentsapi = new CurrentsApiConnector(this.httpClient);
 
-  private readonly errorMessages = new ErrorMessagesConnector(this.snackBar);
+  private readonly errorMessages = new ErrorMessagesConnector(
+    this.snackBar, this
+  );
 
   private readonly missingApiKey = new MissingApiKeyConnector(
     this.snackBar, this
@@ -57,7 +59,7 @@ export class AppService {
 
     rx.merge<events.AppEvent>(
       this.currentsapi.connect(this),
-      this.errorMessages.connect(this),
+      this.errorMessages.output$,
       this.settings.output$,
       this.missingApiKey.output$,
       this.rounting.output$,
