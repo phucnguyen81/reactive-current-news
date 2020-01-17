@@ -8,6 +8,11 @@
 - On api-key-settings, save the api key to local storage
 - On api-key-storage, set key if key is missing
 
+# Show error of type Gateway timeout
+
+Example of error shown on console:
+[HPM] Error occurred while trying to proxy request /v1/latest-news?language=en from localhost:4200 to https://api.currentsapi.services (ECONNRESET) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+
 # Escape html on news contents
 
 # Create toolbar component with customized action buttons

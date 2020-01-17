@@ -40,7 +40,7 @@ export class AppService {
 
   private readonly missingApiKey = new MissingApiKeyConnector(this.snackBar);
 
-  private readonly rounting = new RouterConnector(this.router);
+  private readonly rounting = new RouterConnector(this.router, this);
 
   constructor(
     private snackBar: MatSnackBar,
@@ -58,7 +58,7 @@ export class AppService {
       this.errorMessages.connect(this),
       this.settings.connect(this),
       this.missingApiKey.connect(this),
-      this.rounting.connect(this),
+      this.rounting.output$,
     ).pipe<events.AppEvent>(
       ops.takeUntil(this.finish$)
     ).subscribe(this.input$);
@@ -71,20 +71,24 @@ export class AppService {
     this.finish$.next(true);
   }
 
+  send(event: events.AppEvent): void {
+    this.input$.next(event);
+  }
+
   fetch(): void {
     this.currentNews.fetchLatestNews();
   }
 
   goToHome(): void {
-    this.input$.next(new events.GotoHome());
+    this.rounting.gotoHome();
   }
 
   goToSettings(): void {
-    this.input$.next(new events.GotoSettings());
+    this.rounting.gotoSettings();
   }
 
   goToStatus(): void {
-    this.input$.next(new events.GotoStatus());
+    this.rounting.gotoStatus();
   }
 
   openNewTab(url: string): void {

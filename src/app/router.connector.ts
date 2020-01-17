@@ -10,25 +10,37 @@ import { RouterControl, RouterResult } from './router.control';
 
 export class RouterConnector {
 
-  private readonly control: RouterControl;
+  private readonly control = new RouterControl(this.router);
 
-  constructor(private router: Router) {
-    this.control = new RouterControl(router);
-  }
+  readonly output$: rx.Observable<events.AppEvent> = this.connect();
 
-  connect(appService: AppService): rx.Observable<events.AppEvent> {
-    return appService.output$.pipe(
+  constructor(private router: Router, private appService: AppService) { }
+
+  private connect(): rx.Observable<events.AppEvent> {
+    return this.appService.output$.pipe(
       ops.map<CurrentNewsState, events.GotoEvent>(
         state => state.gotoEvent
       ),
       ops.distinctUntilChanged(),
       ops.switchMap(gotoEvent => {
-        return this.gotoAction(gotoEvent);
+        return this.gotoEffect(gotoEvent);
       }),
     );
   }
 
-  private gotoAction(
+  gotoHome(): void {
+    this.appService.send(new events.GotoHome());
+  }
+
+  gotoSettings(): void {
+    this.appService.send(new events.GotoSettings());
+  }
+
+  gotoStatus(): void {
+    this.appService.send(new events.GotoStatus());
+  }
+
+  private gotoEffect(
     gotoEvent: events.GotoEvent
   ): rx.Observable<events.GotoEvent> {
     if (gotoEvent instanceof events.GotoHome) {

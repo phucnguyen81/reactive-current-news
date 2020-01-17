@@ -21,6 +21,17 @@ export class RouterControl {
     );
   }
 
+  navigateHome(): rx.Observable<RouterResult> {
+    return this.navigate(['']);
+  }
+
+  navigateSettings(): rx.Observable<RouterResult> {
+    return this.navigate(['settings']);
+  }
+
+  navigateStatus(): rx.Observable<RouterResult> {
+    return this.navigate(['status']);
+  }
 }
 
 export class RouterResult {
