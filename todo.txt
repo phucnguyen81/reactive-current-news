@@ -1,3 +1,6 @@
+# Consider removing current-news.control and current-news.connector
+Now that the code has been moved into app.service, consider removing these components.
+
 # Settings component with api-key
 
 - On no api-key, show error and guide to go to settings
@@ -11,6 +14,8 @@
 # Show error of type Gateway timeout
 Example of error shown on console:
 [HPM] Error occurred while trying to proxy request /v1/latest-news?language=en from localhost:4200 to https://api.currentsapi.services (ECONNRESET) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+
+# Verify and let user know there are no changes on the feed (after fetch)
 
 # Run with offline mode
 

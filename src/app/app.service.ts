@@ -8,8 +8,8 @@ import * as ops from 'rxjs/operators';
 
 import * as events from './current-news.events';
 import { CurrentNewsState } from './current-news.state';
+import { nextState } from './current-news.reducers';
 
-import { CurrentNewsConnector } from './current-news.connector';
 import { ErrorMessagesConnector } from './error-messages.connector';
 import { MissingApiKeyConnector } from './missing-api-key.connector';
 import { CurrentsApiConnector } from './currentsapi.connector';
@@ -22,15 +22,14 @@ import { RouterConnector } from './router.connector';
 })
 export class AppService {
 
-  private readonly currentNews = new CurrentNewsConnector();
+  private readonly input$ = new rx.Subject<events.AppEvent>();
 
-  readonly input$: rx.Subject<events.AppEvent> =
-    this.currentNews.input$;
-
-  readonly output$: rx.Observable<CurrentNewsState> =
-    this.currentNews.output$;
-
-  readonly finish$ = new rx.Subject<any>();
+  readonly output$: rx.Observable<CurrentNewsState> = this.input$.pipe(
+    ops.scan<events.AppEvent, CurrentNewsState>(
+      nextState, new CurrentNewsState()
+    ),
+    ops.shareReplay(1),
+  );
 
   private readonly settings = new SettingsConnector();
 
@@ -46,7 +45,19 @@ export class AppService {
     this.snackBar, this
   );
 
-  private readonly rounting = new RouterConnector(this.router, this);
+  private readonly rounting = new RouterConnector(
+    this.router, this
+  );
+
+  private readonly effect$ = rx.merge<events.AppEvent>(
+    this.currentsapi.output$,
+    this.errorMessages.output$,
+    this.settings.output$,
+    this.missingApiKey.output$,
+    this.rounting.output$,
+  );
+
+  private readonly finish$ = new rx.Subject<any>();
 
   constructor(
     private snackBar: MatSnackBar,
@@ -55,25 +66,15 @@ export class AppService {
   ) { }
 
   start(): void {
-    this.currentNews.output$.pipe<CurrentNewsState>(
-      ops.takeUntil(this.finish$)
-    ).subscribe();
-
-    rx.merge<events.AppEvent>(
-      this.currentsapi.output$,
-      this.errorMessages.output$,
-      this.settings.output$,
-      this.missingApiKey.output$,
-      this.rounting.output$,
-    ).pipe<events.AppEvent>(
+    this.effect$.pipe<events.AppEvent>(
       ops.takeUntil(this.finish$)
     ).subscribe(this.input$);
 
-    this.currentNews.fetchLatestNews();
+    this.fetch();
   }
 
   stop(): void {
-    this.currentNews.cancelFetchingLatestNews();
+    this.cancelFetchingLatestNews();
     this.finish$.next(true);
   }
 
@@ -82,7 +83,11 @@ export class AppService {
   }
 
   fetch(): void {
-    this.currentNews.fetchLatestNews();
+    this.input$.next(new events.FetchLatestNews());
+  }
+
+  cancelFetchingLatestNews(): void {
+    this.input$.next(new events.CancelFetchingLatestNews());
   }
 
   goToHome(): void {
