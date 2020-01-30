@@ -67,3 +67,5 @@ Also find an icon for it
 # Check out examples/ideas for news feed
 -   https://news.google.com
 -   https://www.newsweek.com/newsfeed
+
+# Use a different news site (reddit maybe?)

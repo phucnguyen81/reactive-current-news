@@ -2,7 +2,7 @@
 
 -   Flow-based programming
 -   Statecharts (will use xState later)
--   The book 'Constructing UI with Statecharts)
+-   The book 'Constructing UI with Statecharts'
 -   Closed-loop process control
 -   Industrial control system (reading)
 
