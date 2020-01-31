@@ -50,7 +50,16 @@ export function nextState(
     return {
       ...state,
       apiKey: event.apiKey,
-    }
+    };
+  }
+  else if (event instanceof events.StateSaved) {
+    // nothing to do yet
+  }
+  else if ((event instanceof events.Init) && event.initialState) {
+    return {
+      ...state,
+      ...event.initialState,
+    };
   }
 
   return state;

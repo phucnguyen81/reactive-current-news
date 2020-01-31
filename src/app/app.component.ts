@@ -34,7 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    this.appService.saveApiKey();
+    this.appService.save();
   }
 
   goToHome(): void {

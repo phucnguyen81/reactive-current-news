@@ -29,7 +29,7 @@ export class SettingsComponent {
   }
 
   save(): void {
-    this.appService.saveApiKey();
+    this.appService.save();
   }
 
   goToHome(): void {

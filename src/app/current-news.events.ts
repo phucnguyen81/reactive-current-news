@@ -1,6 +1,19 @@
 import { LatestNews } from './current-news.interface';
+import { CurrentNewsState } from './current-news.state';
 
 export class AppEvent { }
+
+export class Init extends AppEvent {
+  constructor(readonly initialState: CurrentNewsState) {
+    super();
+  }
+}
+
+export class StateSaved extends AppEvent {
+  constructor(readonly state: CurrentNewsState) {
+    super();
+  }
+}
 
 export class AppError extends AppEvent {
   readonly name: string;

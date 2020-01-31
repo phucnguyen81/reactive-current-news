@@ -6,10 +6,12 @@ import { Router } from "@angular/router";
 import * as rx from 'rxjs';
 import * as ops from 'rxjs/operators';
 
+import { ContextService } from './context.service';
 import * as events from './current-news.events';
 import { CurrentNewsState } from './current-news.state';
 import { nextState } from './current-news.reducers';
 
+import { ContextConnector } from './context.connector';
 import { ErrorMessagesConnector } from './error-messages.connector';
 import { MissingApiKeyConnector } from './missing-api-key.connector';
 import { CurrentsApiConnector } from './currentsapi.connector';
@@ -33,6 +35,10 @@ export class AppService {
 
   private readonly settings = new SettingsConnector();
 
+  private readonly context = new ContextConnector(
+    this.contextService, this
+  );
+
   private readonly currentsapi = new CurrentsApiConnector(
     this.httpClient, this
   );
@@ -50,6 +56,7 @@ export class AppService {
   );
 
   private readonly effect$ = rx.merge<events.AppEvent>(
+    this.context.output$,
     this.currentsapi.output$,
     this.errorMessages.output$,
     this.settings.output$,
@@ -64,10 +71,16 @@ export class AppService {
   constructor(
     private snackBar: MatSnackBar,
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private contextService: ContextService,
   ) { }
 
+  send(event: events.AppEvent): void {
+    this.input$.next(event);
+  }
+
   start(): void {
+    this.initFromContext();
     this.fetchLatestNews();
   }
 
@@ -76,8 +89,24 @@ export class AppService {
     this.effectSubscription.unsubscribe();
   }
 
-  send(event: events.AppEvent): void {
-    this.input$.next(event);
+  initFromContext(): void {
+    const state: CurrentNewsState = this.context.loadState();
+    if (state) {
+      this.input$.next(new events.Init(state));
+    }
+  }
+
+  save(): void {
+    this.settings.saveApiKey();
+    this.context.saveState();
+  }
+
+  openNewTab(url: string): void {
+    this.context.openNewTab(url);
+  }
+
+  changeApiKey(apiKey: string): void {
+    this.settings.changeApiKey(apiKey);
   }
 
   fetchLatestNews(): void {
@@ -98,18 +127,6 @@ export class AppService {
 
   goToStatus(): void {
     this.rounting.gotoStatus();
-  }
-
-  openNewTab(url: string): void {
-    window.open(url, '_blank');
-  }
-
-  changeApiKey(apiKey: string): void {
-    this.settings.changeApiKey(apiKey);
-  }
-
-  saveApiKey(): void {
-    this.settings.saveApiKey();
   }
 
 }

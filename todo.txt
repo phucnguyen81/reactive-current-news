@@ -1,3 +1,10 @@
+# Init the app from localStorage
+Init on state: loadingState?, yeah, decouple from order or initialization
+All come from the window object => window service?
+
+# If no news shown, then after setting API key, call to show news
+Uhmm, feel the need for statechart yet?
+
 # Make window control for the window object
 -   Call window.open(url, '_blank') to open new tab
 -   Failed/sucess => returned from the window.open call
