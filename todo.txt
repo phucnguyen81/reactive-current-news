@@ -1,0 +1,60 @@
+# Have a single UI test with fake/test HttpClient
+
+# Add a button to each news card to remote itself
+
+# Auto-fetch news on certain condition
+# After fetching, notify if there are no changes on the feed
+
+# Add language to settings
+
+# Improve status to show recent sequence of (state, event)
+
+# Show error of type Gateway timeout
+Example of error shown on console:
+[HPM] Error occurred while trying to proxy request /v1/latest-news?language=en from localhost:4200 to https://api.currentsapi.services (ECONNRESET) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+
+# Add offline mode
+Service worker?
+
+# Move rateLimitRemaining to top info
+The rateLimitRemaining is top level info, should not be bound
+to the latestNews.
+
+# Move learning of xstate out of this
+
+# From Settings, go back to previous route after Save
+
+# Create use cases
+
+# Use an icon for 'Today remaining requests'
+# Flash the 'Today remaining requests' if it changes
+
+# Add search box to the top toolbar
+
+# Show warning if rate limit drops under a threshold
+
+# Configure material themes
+
+# Add timeout settings for fetching news
+-   Timeout for HttpClient
+-   Timeout for currentsapi
+
+# Maintain a fixed number of news cards on screen
+When the on-screen news cards drop below a certain threshold, fill it up with new/available news cards (fetch if necessary)
+
+# Learn angular control design
+HttpClient, Router
+
+# Convert css to ngStyle control
+
+# Switch themes
+https://material.angular.io/guide/theming
+
+# Rename current-news component to latest-news
+
+# Escape html on news contents
+
+# Switch to a different news site
+# Describe the app main controller logic with statecharts
+# Describe the app dataflow with Node-RED
+

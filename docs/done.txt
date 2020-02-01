@@ -1,0 +1,6 @@
+# Save/restore state with localStorage
+
+# Make window control for the window object
+The window object has its own distinct state, should be a control.
+
+
